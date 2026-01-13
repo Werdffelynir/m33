@@ -1,5 +1,5 @@
 import {Screen} from "engine/Screen.js";
-import {PageComponent} from "../components/index/PageComponent.js";
+import {StartpageComponent} from "../components/index/StartpageComponent.js";
 
 
 export class IndexScreen extends Screen {
@@ -7,7 +7,7 @@ export class IndexScreen extends Screen {
     create() {
         super.create()
 
-        this.page = new PageComponent(this.register, {
+        this.page = new StartpageComponent(this.register, {
             parent: this.root
         });
     }

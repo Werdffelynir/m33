@@ -147,9 +147,17 @@ export class PayerControls_SceneRay {
                face,
                onUpdate,
                onInteract,
+               keymap
            } = {}) {
 
-        const keymap = this.controlsKeyboard.keymap
+        keymap = keymap ?? {
+            forward: {pressed: false},
+            backward: {pressed: false},
+            left: {pressed: false},
+            right: {pressed: false},
+            boost: {pressed: false},
+            jump: {pressed: false},
+        }
 
         /** @type {THREE.Camera}*/
         this.camera = camera
@@ -264,7 +272,7 @@ export class PayerControls_SceneRay {
             // --- horizontal movement ---
             if (inputX !== 0 || inputZ !== 0) {
 
-                if (onGround && keymap.shift.pressed ) {
+                if (onGround && keymap.boost.pressed ) {
                      speed = speedFixed * 3
                 } else {
                      speed = speedFixed

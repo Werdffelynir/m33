@@ -18,7 +18,5 @@ export class StateGame extends IState {
         phase: GAME_PHASE.idle,
     };
 
-    constructor(state = {}) {
-        super(state);
-    }
+
 }

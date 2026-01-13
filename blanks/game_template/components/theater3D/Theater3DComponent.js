@@ -3,7 +3,6 @@ import {EventBus} from "../../../engine/EventBus.js";
 import {Doom} from "../../../engine/utils/Doom.js";
 
 
-
 const CSS = ``;
 const HTML = `
 div
@@ -31,14 +30,12 @@ export class Theater3DComponent extends ReaComponent {
         this.bus.busme(this.root, ['click', 'mousedown', 'mouseup', 'dblclick', 'contextmenu'])
     }
 
+    _setup() {}
+
     constructor(register, props) {
         super(register, props);
 
-        // this.setup()
-    }
-
-    setup() {
-        // this.mount()
+        this.mount()
     }
 
     hello(){
