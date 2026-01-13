@@ -1,0 +1,220 @@
+/* ______________________________________________________________________________  Basic                 */
+
+.themeDesktop .UIIDesktop, .themeDesktop.UIIDesktop{
+    background-color: var(--ca15);
+}
+.themeDesktop .UIIPad, .themeDesktop.UIIPad{
+    background-color: var(--ca13);
+}
+.themeDesktop .UIIDesktop, .themeDesktop.UIIDesktop, .themeDesktop .UIIPad, .themeDesktop.UIIPad {
+    border: var(--ca14) solid 1px;
+    box-shadow: 1px 1px 4px 0px var(--ca17);
+}
+
+
+
+
+/* ______________________________________________________________________________  Range     themeDarkBlue           */
+.themeDesktop .UIIRangeShell{
+    background-color: var(--ca12);
+}
+.themeDesktop .UIIRangeLine{
+    background: var(--ca5);
+    box-shadow: 1px 1px 20px -5px var(--ca12) inset;
+}
+.themeDesktop .UIIRangeHaftShow  .UIIRangeLineHaft{
+    background: var(--ca5);
+    border-left: 2px solid var(--ca9);
+    box-shadow: 0px 0px 5px 1px var(--ca9) inset;
+}
+.themeDesktop .UIIRangeVertical[data-ui] {
+    border-right:   4px solid var(--ca12);
+    border-top:    4px solid var(--ca12);
+    border-left:  4px solid var(--ca10);
+    border-bottom: 4px solid var(--ca10);
+}
+
+/* ______________________________________________________________________________  Button                */
+.themeDesktop .UIILink {
+    color: var(--ca12);
+}
+.themeDesktop .UIILink:hover {
+    color: var(--ca10);
+    text-decoration: underline;
+}
+
+.themeDesktop .UIIButton {
+    width: 90px;
+    height: 40px;
+    /* display: flex; */
+    /* align-items: center; */
+    text-align: center;
+    /*margin: 0 2px;*/
+    /*padding: 4px;*/
+    /* justify-content: center; */
+    background-color: var(--ca10);
+    border: 4px solid var(--ca12);
+}
+.themeDesktop .UIIButton:hover {}
+.themeDesktop .UIIButton:active,
+.themeDesktop .UIIButtonPressed  {
+    color: var(--ca13);
+    background-color: var(--ca6);
+}
+
+
+/* ______________________________________________________________________________  Sign                  */
+
+.themeDesktop .UIISign {
+    box-shadow: 1px 1px 4px 0px var(--ca9);
+}
+.themeDesktop .UIISignTumbler{
+    margin: 2px;
+
+    box-shadow: none;
+    background-color: var(--ca13);
+}
+.themeDesktop .UIISignTumblerOn {
+    /*
+    1px 1px 4px 1px var(--ca11) inset;
+    background: radial-gradient(ellipse 38px 30px, var(--ca8), var(--ca12), var(--ca10));*/
+}
+.themeDesktop .UIISignTumblerOff {
+}
+
+
+
+/* ______________________________________________________________________________  Phaser                */
+
+.themeDesktop .UIIPhaserBean {
+    color: var(--ca7);
+    /*background-color: var(--ca8);*/
+    background-color: var(--ca10);
+}
+.themeDesktop .UIIPhaserBeanDeactivated {
+    color: var(--ca11);
+    background-color: var(--ca8);
+}
+.themeDesktop .UIIPhaserBeanOn {
+    /*box-shadow: 0px 0px 6px 2px var(--ca11) inset,  2px 2px 2px 1px var(--ca9) inset;*/
+    box-shadow: none;
+
+    color: var(--ca0);
+    background-color: var(--ca6);
+}
+.themeDesktop .UIIPhaserShell .UIIPhaserBean:hover,
+.themeDesktop .vertical.UIIPhaserShell .UIIPhaserBean:hover  {
+    background-color: var(--ca9);
+}
+.themeDesktop .UIIPhaserShell .UIIPhaserBean:active,
+.themeDesktop .vertical.UIIPhaserShell .UIIPhaserBean:active  {
+    /*border-left: var(--ca11) solid 2px;*/
+    /*border-top:  var(--ca11) solid 2px;*/
+}
+
+.themeDesktop .UIIPhaserShell .UIIPhaserBeanOn:active {
+    border-left: none;
+    border-top:  none;
+}
+
+.themeDesktop .UIIPhaserShell .UIIPhaserBeanOn:hover {
+    background-color: var(--ca6);
+}
+.themeDesktop .vertical.UIIPhaserShell .UIIPhaserBean:hover {}
+
+/* ______________________________________________________________________________  UIICanvas                        */
+
+.themeDesktop .UIICanvas {
+    background: transparent;
+}
+
+/* ______________________________________________________________________________  Hint                         */
+.themeDesktop .UIIHint{
+    background-color: var(--ca10);
+    border: var(--ca4) solid 1px;
+    box-shadow: 1px 1px 4px 0px var(--ca9);
+    color: var(--ca2);
+}
+
+/* ______________________________________________________________________________  Borders                           */
+
+/* ______________________________________________________________________________  UIIInput UIIMultitext */
+
+.themeDesktop .UIIInput {
+    color: var(--ca3);
+    background-color: var(--ca12);
+    box-shadow: none;
+    /*0px 4px 50px -20px var(--ca13) inset;*/
+}
+
+.themeDesktop input,
+.themeDesktop textarea,
+.themeDesktop [contenteditable].UIIInput,
+.themeDesktop .UIIInputLED
+{
+    color: var(--ca2);
+    background: none;
+    background-color: var(--ca10);
+    box-shadow: none;
+    text-shadow: none;
+    /*background: radial-gradient(ellipse 180% 110%, var(--ca5), var(--ca7), var(--ca9));*/
+    /*box-shadow: 4px 4px 16px -2px var(--ca13) inset;*/
+    /*text-shadow: 0px 1px 2px var(--ca12) ;*/
+}
+
+.themeDesktop .UIISign,
+.themeDesktop .UIIRange,
+.themeDesktop .UIICanvas,
+.themeDesktop .UIIPhaser,
+.themeDesktop .UIISwitcher,
+.themeDesktop .UIIButton,
+.themeDesktop .UIIBorderUp
+{
+    border-left: 1px solid var(--ca10);
+    border-top: 1px solid var(--ca10);
+    border-right: 1px solid var(--ca12);
+    border-bottom: 1px solid var(--ca12);
+}
+.themeDesktop .UIIBorderUpVertical {
+    border-left: 1px solid var(--ca12);
+    border-top: 1px solid var(--ca10);
+    border-right: 1px solid var(--ca10);
+    border-bottom: 1px solid var(--ca12);
+}
+.themeDesktop .UIIBorderDown {
+    border-left: 1px solid var(--ca10);
+    border-top: 1px solid var(--ca10);
+    border-right: 1px solid var(--ca10);
+    border-bottom: 1px solid var(--ca10);
+}
+
+.themeDesktop .UIIInput,
+.themeDesktop .UIIMultitext,
+.themeDesktop .UIITextline,
+
+.themeDesktop .UIIBorderDeep,
+.themeDesktop .UIIButtonPressed,
+.themeDesktop .UIIButton:active
+{
+    border-left: 1px solid var(--ca12);
+    border-top: 1px solid var(--ca12);
+    border-right: 1px solid var(--ca10);
+    border-bottom: 1px solid var(--ca10);
+}
+
+
+
+
+/* ______________________________________________________________________________  Basic themeDark               */
+
+.themeDesktop .UIIDesktop,  .themeDesktop.UIIDesktop,
+.themeDesktop .UIIPad,      .themeDesktop.UIIPad{
+    background-color: var(--ca12);
+}
+.themeDesktop .UIIDesktop,  .themeDesktop.UIIDesktop,
+.themeDesktop .UIIPad,      .themeDesktop.UIIPad {
+    border: var(--ca10) solid 1px;
+    box-shadow: 1px 1px 4px 0px var(--ca14);
+}
+
+

@@ -1,0 +1,411 @@
+
+
+
+
+@layer uii {
+
+    :root {
+        --font-size: 100%;
+        --font-size-big: 26px;
+        --font-size-min: 12px;
+
+/*        --font-mono-family: monospace, "Roboto Mono", "FreeMono", "Consolas", "SF Mono";
+        --font-mono: normal var(--font-size) var(--font-mono-family);
+
+        --font-family: "DejaVu Sans", "Droid Sans Fallback";
+        --font-family-sans: "sans-serif","sans","Ubuntu Condensed","Ubuntu";
+        --font: normal var(--font-size) var(--font-family);*/
+
+    }
+
+    /* ______________________________________________________________________________  Basic                            */
+
+    .UII {}
+    .UIIRoot {}
+    .UIIPad {}
+    .UIIDesktop {}
+    .UIIDesktop > * {
+        user-select: none;
+    }
+    .UIIPad, .UIIDesktop{
+        /*padding: 5px;*/
+    }
+    .themeDarkBlue {
+
+    }
+
+    /* ______________________________________________________________________________  Label                            */
+    .UIILabel {
+        /*display: flex;*/
+        /*align-items: center;*/
+        /*height: 30px;*/
+        /*font-size: 100%;*/
+        user-select: none;
+    }
+
+
+    /* ______________________________________________________________________________  Hint                              */
+    .UIIHint {
+        /*max-width: 300px;*/
+        /*width: max-content;*/
+        padding: 3px 5px 1px 5px;
+        transition: all ease-in-out 0.5s;
+        transition-property: disply, color, background-color, opacity, visibility;
+        font-size: 90%;
+        text-align: left;
+    }
+
+    /* ______________________________________________________________________________  Inputs Textline Multitext         */
+    input[type="text"]:disabled {}
+    .UIITextline, .UIIMultitext, .UIIInput, input.UIIInput {
+        width: 100px;
+        border-radius: 0;
+        height: 30px;
+        padding: 0 5px;
+        font: bold 14px monospace, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    }
+    .UIITextline {
+        display: grid;
+        align-items: center;
+        height: 30px;
+        line-height: 22px;
+        overflow: hidden;
+    }
+    .UIIMultitext {
+        height: 70px;
+        width: 180px;
+        overflow: hidden;
+        padding: 3px 6px;
+    }
+    .UIITextline, .UIIMultitext {
+    }
+    [contenteditable].UIITextline {}
+    [contenteditable].UIIMultitext {}
+
+
+
+
+
+
+
+    /* ______________________________________________________________________________  Button Link                       */
+    .UIILink {
+        padding: 1px;
+        cursor: pointer;
+    }
+    .UIIButton {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 30px;
+        padding: 2px 5px 1px 5px;
+        user-select: none;
+        cursor: pointer;
+    }
+
+
+
+
+
+
+    /* ______________________________________________________________________________  Sign                              */
+    .UIISign {
+        width: 30px;
+        height: 30px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    .UIISignTumbler{
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+    }
+    .UIISignTumblerOn {
+        /*float: right;*/
+    }
+    .UIISignTumblerOff {
+    }
+
+
+    /* ______________________________________________________________________________  Switcher                          */
+    .UIISwitcher {
+        width: 60px;
+        height: 30px;
+    }
+    .UIISwitcherTumbler {
+        width: 30px;
+        height: 22px;
+        float: left;
+    }
+    .UIISwitcherTumblerOn {
+        float: right;
+    }
+    .UIISwitcherTumblerOff {
+    }
+
+
+
+        /* ______________________________________________________________________________  Range                             */
+    .UIIRange {
+        display: flex;
+    }
+    .UIIRangeVertical {
+        transform: rotate(-90deg);
+        translate: -85px 85px;
+    }
+    .UIIRangeShell {
+        width: 100%;
+        height: 100%;
+    }
+    .UIIRangeLine {
+        width: 0%;
+        max-width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .UIIRangeHaftShow .UIIRangeLineHaft{
+        width: 10px;
+        height: 100%;
+        cursor: pointer;
+    }
+    .UIIRangeHaftShow:active{
+        cursor: pointer;
+    }
+
+
+    /* ______________________________________________________________________________  Phaser                            */
+    .UIIPhaser {
+        user-select: none;
+    /*    min-width: 30px;
+        min-height: 30px;*/
+    }
+    .UIIPhaserShell {
+        width: auto;
+    }
+    .UIIPhaserShell .UIIPhaserBean {
+        min-width: 4px;
+    }
+    .UIIPhaserShell {
+    /*    padding-bottom: 1px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+        flex-wrap: nowrap;
+        flex-direction: row;*/
+    }
+    .UIIPhaserShell .UIIPhaserBean {
+        width: 100%;
+        /* height: 100%;
+        min-height: 22px;
+        min-width: 2px;*/
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .vertical.UIIPhaserShell {
+        display: flex;
+        justify-content: space-between;
+        align-content: space-around;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+    .vertical.UIIPhaserShell .UIIPhaserBean {
+        min-height: 2px;
+        height: 100%;
+    }
+
+    .UIIPhaserShell .UIIPhaserBean:hover,
+    .vertical.UIIPhaserShell .UIIPhaserBean:hover {}
+
+
+
+    .UIIPhaserStyleRange {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+    .UIIPhaserStyleRangeVertical {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+    .UIIPhaserStyleRange .UIIPhaserBean{
+        width: 100%;
+        height: 100%;
+    }
+    .UIIPhaserStyleRangeVertical .UIIPhaserBean{
+        width: 100%;
+        height: 100%;
+    }
+    .UIIPhaserStyleLines,
+    .UIIPhaser .shellLine{
+        width: 100%;
+        height: 100%; /* todo */
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    .UIIPhaserStyleRows,
+    .UIIPhaser .shellRows{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+        flex-wrap: wrap;
+    }
+    .UIIPhaser .UIIPhaserShell .UIIPhaserBean {
+    }
+
+    .UIIPhaserStyleTiles,
+    .UIIPhaser .shellTiles  {
+         width: 100%;
+         height: 100%; /*todo */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+    }
+    .UIIPhaser .shellTiles .UIIPhaserBean {
+        width: 33%;
+    }
+
+
+    /* ______________________________________________________________________________  Canvas                            */
+
+    .UIICanvas {}
+
+
+
+
+    /* ______________________________________________________________________________  UIIChart                           */
+
+    .UIIChart:active{
+        cursor: pointer;
+    }
+    .UIIChart.UIIChartHaftOn:hover{}
+    .UIIChart {
+    }
+    .UIIChartVertical{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    .UIIChart .UIIChartShell{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+    }
+    .UIIChart:is(.UIIChartVertical) .UIIChartShell{
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+
+    .UIIChart:not(.UIIChartVertical) .UIIChartShell{
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+    .UIIChart .UIIChartDetail{
+        position: absolute;
+        margin-bottom: 0px;
+    }
+    .UIIChart .UIIChartDetail span{
+        width: 100%;
+        display: inline-block;
+    }
+    .UIIChart .UIIChartLine{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .UIIChart:is(.UIIChartVertical) .UIIChartLine{
+        max-height: 100%;
+        width: 100%;
+    }
+    .UIIChart:not(.UIIChartVertical) .UIIChartLine{
+        max-width: 100%;
+        height: 100%;
+    }
+    .UIIChart:is(.UIIChartVertical) .UIIChartLineHaft{
+        width:100%;
+        height:  10px;
+        margin-top: -10px;
+    }
+    .UIIChart:not(.UIIChartVertical) .UIIChartLineHaft{
+        width: 10px;
+        height: 100%;
+    }
+    .UIIChart .UIIChartLineHaft{
+        cursor: pointer;
+    }
+
+    /* ______________________________________________________________________________  UIIOptioner                      */
+
+    .UIIOptioner{
+        padding: 1px;
+    }
+    .UIIOptioner .title{
+        width: calc(100% - 40px);
+        cursor: pointer;
+    }
+    .UIIOptioner .header{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    .UIIOptioner .header > div{}
+    .UIIOptioner .header .arrow{
+        width: 30px;
+        height: 16px;
+    }
+    .UIIOptioner .header .arrow:before{
+        display: block;
+        width: 30px;
+        height: 16px;
+        padding-left: 5px;
+        margin-top: -2px;
+    }
+    .triangleDown:before{
+        content: " ▼ ";
+        content: " ▾ ";
+    }
+    .triangleRight:before{
+        content: " ▲ ";
+        content: " ▸ ";
+    }
+    .UIIOptioner .option{
+        height: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+
+}

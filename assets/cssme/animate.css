@@ -1,0 +1,205 @@
+
+
+/**
+For parent element
+animated
+animated.fast
+animated.slow
+animated.infinite
+animated.pause
+animated.reverse
+
+delay-xs
+delay-sm
+delay-md
+delay-lg
+
+For children:
+fadeIn
+fadeOut
+slideInUp
+slideInLeft
+pop
+bounce
+shake
+spin
+flipInY
+reveal
+pop-hover
+bounce-hover
+
+
+stagger .stagger-item
+
+
+ */
+@layer animate {
+
+    /* mini-animate.css — minimal modern animation utils */
+
+    /* -- defaults */
+    :root{
+        --animate-duration: 1000ms;
+        --animate-ease: cubic-bezier(.2,.9,.3,1);
+        --animate-ease-smooth: cubic-bezier(.22,.1,.36,1);
+        --animate-stagger: 800ms;
+        --animate-fill: both;
+    }
+
+    /* respect users who prefer no motion */
+    @media (prefers-reduced-motion: reduce){
+        .animated { animation: none !important; transition: none !important; }
+    }
+
+    /* utility base */
+    .animated {
+        will-change: transform, opacity;
+        animation-duration: var(--animate-duration);
+        animation-timing-function: var(--animate-ease);
+        animation-fill-mode: var(--animate-fill);
+        backface-visibility: hidden;
+    }
+
+    /* overrides */
+    .animated.faster { animation-duration: calc(var(--animate-duration) * 0.2); }
+    .animated.fast { animation-duration: calc(var(--animate-duration) * 0.5); }
+    .animated.slow { animation-duration: calc(var(--animate-duration) * 1.5); }
+    .animated.slowly { animation-duration: calc(var(--animate-duration) * 2.5); }
+    .animated.infinite { animation-iteration-count: infinite; }
+    .animated.pause { animation-play-state: paused; }
+    .animated.reverse { animation-direction: reverse; }
+
+    /* delays (small set) */
+    .delay-xs { animation-delay: 80ms; }
+    .delay-sm { animation-delay: 160ms; }
+    .delay-md { animation-delay: 320ms; }
+    .delay-lg { animation-delay: 480ms; }
+
+    /* ========== EFFECTS ========== */
+
+    /* fade */
+    @keyframes ma-fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    .fadeIn { animation-name: ma-fade-in; animation-timing-function: cubic-bezier(0.4, 0.07, 0.89, 0.25); }
+    @keyframes ma-fade-out {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+    .fadeOut { animation-name: ma-fade-out; animation-timing-function: cubic-bezier(.36,.07,.19,.97); }
+
+    /* slide in from bottom */
+    @keyframes ma-slide-up {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .slideInUp { animation-name: ma-slide-up; }
+    @keyframes ma-slide-down {
+        from { opacity: 0; transform: translateY(-12px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .slideInDown { animation-name: ma-slide-up; }
+
+    /* slide in from right */
+    @keyframes ma-slide-left {
+        from { opacity: 0; transform: translateX(12px); }
+        to   { opacity: 1; transform: translateX(0); }
+    }
+    .slideInLeft { animation-name: ma-slide-left; }
+    @keyframes ma-slide-left-out {
+        from { opacity: 1; transform: translateX(0); }
+        to   { opacity: 0; transform: translateX(12px); }
+    }
+    .slideOutLeft { animation-name: ma-slide-left-out; }
+
+
+    /* pop (scale + subtle overshoot) */
+    @keyframes ma-pop {
+        0%   { opacity: 0; transform: scale(.88); }
+        60%  { transform: scale(1.05); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+    .pop { animation-name: ma-pop; animation-timing-function: var(--animate-ease-smooth); }
+
+    /* subtle bounce for attention */
+    @keyframes ma-bounce {
+        0% { transform: translateY(0); }
+        30% { transform: translateY(-6px); }
+        60% { transform: translateY(0); }
+        100% { transform: translateY(-3px); }
+    }
+    .bounce { animation-name: ma-bounce; }
+
+    /* shake (for errors) */
+    @keyframes ma-shake {
+        0% { transform: translateX(0); }
+        20% { transform: translateX(-6px); }
+        40% { transform: translateX(6px); }
+        60% { transform: translateX(-4px); }
+        80% { transform: translateX(4px); }
+        100% { transform: translateX(0); }
+    }
+    .shake { animation-name: ma-shake; animation-timing-function: cubic-bezier(.36,.07,.19,.97); }
+
+    @keyframes ma-shake-up {
+        0% { transform: translateY(0); }
+        20% { transform: translateY(-6px); }
+        40% { transform: translateY(6px); }
+        60% { transform: translateY(-3px); }
+        80% { transform: translateY(2px); }
+        100% { transform: translateY(0); }
+    }
+    .shakeUp { animation-name: ma-shake-up; animation-timing-function: cubic-bezier(.36,.07,.19,.97); }
+
+    /* spin */
+    @keyframes ma-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin { animation-name: ma-spin; }
+
+    /* flip-in-y */
+    @keyframes ma-flip-y {
+        0%   { transform: perspective(800px) rotateX(90deg); opacity: 0; }
+        60%  { transform: perspective(800px) rotateX(-15deg); opacity: 1; }
+        100% { transform: perspective(800px) rotateX(0deg); }
+    }
+    .flipInY { animation-name: ma-flip-y; animation-timing-function: var(--animate-ease-smooth); }
+
+    /* reveal (clip-path) — modern mask reveal */
+    @keyframes ma-reveal {
+        0% { clip-path: inset(0 100% 0 0); opacity: 0; transform: translateY(4px); }
+        100% { clip-path: inset(0 0 0 0); opacity: 1; transform: translateY(0); }
+    }
+    .reveal { animation-name: ma-reveal; animation-timing-function: var(--animate-ease-smooth); }
+
+    /* stagger container: children with .stagger-item get delayed
+    /* base for stagger children */
+    .stagger .stagger-item{
+        opacity:0;
+        animation-name: ma-fade-in;
+        animation-duration: var(--animate-duration);
+        animation-fill-mode: both;
+        animation-timing-function: cubic-bezier(.2,.9,.3,1);
+        /* animation-delay will be provided by --i */
+        animation-delay: calc(var(--animate-stagger) * var(--i, 0));
+    }
+
+    /* set indices (extend as needed) */
+    .stagger .stagger-item:nth-child(1){ --i: 1 }
+    .stagger .stagger-item:nth-child(2){ --i: 2 }
+    .stagger .stagger-item:nth-child(3){ --i: 3 }
+    .stagger .stagger-item:nth-child(4){ --i: 4 }
+    .stagger .stagger-item:nth-child(5){ --i: 5 }
+    .stagger .stagger-item:nth-child(6){ --i: 6 }
+    .stagger .stagger-item:nth-child(7){ --i: 7 }
+    .stagger .stagger-item:nth-child(8){ --i: 8 }
+    .stagger .stagger-item:nth-child(9){ --i: 9 }
+    .stagger .stagger-item:nth-child(10){ --i: 10 }
+
+
+    /* tiny helper for chaining transform and opacity on hover */
+    .pop-hover:hover { transform: translateY(-4px) scale(1.02); transition: transform 160ms var(--animate-ease-smooth); }
+    .bounce-hover:hover { animation-name: ma-bounce; }
+    .shake-hover:hover { animation-name: ma-shake; animation-timing-function: cubic-bezier(.36,.07,.19,.97); }
+    .shakeUp-hover:hover { animation-name: ma-shake-up; animation-timing-function: cubic-bezier(.36,.07,.19,.97); }
+
+}

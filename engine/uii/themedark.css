@@ -1,0 +1,276 @@
+/* ______________________________________________________________________________  Basic themeDark               */
+
+.themeDark .UIIDesktop, .themeDark.UIIDesktop{
+    background-color: var(--ca15);
+}
+.themeDark .UIIPad, .themeDark.UIIPad{
+    background-color: var(--ca13);
+}
+.themeDark .UIIDesktop, .themeDark.UIIDesktop, .themeDark .UIIPad, .themeDark.UIIPad {
+    border: var(--ca14) solid 1px;
+    box-shadow: 1px 1px 4px 0px var(--ca17);
+}
+
+/* ______________________________________________________________________________  Button themeDark              */
+.themeDark .UIILink {
+    color: var(--ca7);
+}
+.themeDark .UIILink:hover {
+    color: var(--ca4);
+    text-decoration: underline;
+}
+
+.themeDark .UIIButton {
+    background-color: var(--ca14);
+}
+.themeDark .UIIButton:hover {}
+.themeDark .UIIButton:active,
+.themeDark .UIIButtonPressed  {
+    color: var(--ca5);
+    background-color: var(--ca16);
+}
+
+
+/* ______________________________________________________________________________  Sign  themeDark               */
+
+.themeDark .UIISign {
+    box-shadow: 1px 1px 4px 0px var(--ca9);
+}
+.themeDark .UIISignTumbler{
+    box-shadow: 1px 1px 4px 1px var(--ca11) inset;
+    background-color: var(--ca13);
+}
+.themeDark .UIISignTumblerOn {
+    background: radial-gradient(ellipse 38px 30px, var(--ca8), var(--ca12), var(--ca10));
+}
+.themeDark .UIISignTumblerOff {
+}
+
+
+
+/* ______________________________________________________________________________  Phaser     themeDark          */
+
+.themeDark .UIIPhaserBean {
+    color: var(--ca7);
+    background-color: var(--ca8);
+}
+.themeDark .UIIPhaserBeanDeactivated {
+    color: var(--ca11);
+    background-color: var(--ca8);
+}
+.themeDark .UIIPhaserBeanOn {
+    box-shadow: 0px 0px 6px 2px var(--ca11) inset,
+    2px 2px 2px 1px var(--ca9) inset;
+
+    color: var(--ca0);
+    background-color: var(--ca9);
+}
+.themeDark .UIIPhaserShell .UIIPhaserBean:hover,
+.themeDark .vertical.UIIPhaserShell .UIIPhaserBean:hover  {
+    background-color: var(--ca9);
+}
+.themeDark .UIIPhaserShell .UIIPhaserBean:active,
+.themeDark .vertical.UIIPhaserShell .UIIPhaserBean:active  {
+    border-left: var(--ca11) solid 2px;
+    border-top:  var(--ca11) solid 2px;
+}
+
+.themeDark .UIIPhaserShell .UIIPhaserBeanOn:active {
+    border-left: none;
+    border-top:  none;
+}
+
+.themeDark .UIIPhaserShell .UIIPhaserBeanOn:hover {
+    background-color: var(--ca9);
+}
+.themeDark .vertical.UIIPhaserShell .UIIPhaserBean:hover {}
+
+
+
+/* ______________________________________________________________________________  UIIChart  themeDark           */
+
+.themeDark .UIIChart{
+    /*border: 1px solid var(--cc11);*/
+}
+.themeDark .UIIChart .UIIChartShell{
+    background-color: var(--ca13);
+    border: 1px solid var(--ca11);
+}
+.themeDark .UIIChart .UIIChartLine{
+    background-color: var(--ca8);
+}
+.themeDark .UIIChart .UIIChartLineHaft{
+    background-color: var(--ca7);
+}
+
+
+/* ______________________________________________________________________________  UIIInput UIIMultitext UIITextline  */
+
+
+.themeDark input,
+.themeDark textarea,
+.themeDark .UIIInput,
+.themeDark .UIIMultitext,
+.themeDark .UIITextline {
+    background-color: var(--ca13);
+    color: var(--ca4);
+}
+
+
+/* ______________________________________________________________________________  Borders                           */
+
+
+
+.themeDark .UIISign,
+.themeDark .UIIRange,
+.themeDark .UIICanvas,
+.themeDark .UIIPhaser,
+.themeDark .UIISwitcher,
+.themeDark .UIIButton,
+.themeDark .UIIBorderUp
+{
+    border-left: 4px solid var(--ca8);
+    border-top: 4px solid var(--ca8);
+    border-right: 4px solid var(--ca10);
+    border-bottom: 4px solid var(--ca10);
+}
+.themeDark .UIIBorderUpVertical {
+    border-left: 4px solid var(--ca10);
+    border-top: 4px solid var(--ca8);
+    border-right: 4px solid var(--ca8);
+    border-bottom: 4px solid var(--ca10);
+}
+.themeDark .UIIBorderDown {
+    border-left: 4px solid var(--ca8);
+    border-top: 4px solid var(--ca8);
+    border-right: 4px solid var(--ca8);
+    border-bottom: 4px solid var(--ca8);
+}
+
+
+.themeDark .UIIInput,
+.themeDark .UIIMultitext,
+.themeDark .UIITextline,
+
+.themeDark .UIIBorderDeep,
+.themeDark .UIIButtonPressed,
+.themeDark .UIIButton:active
+{
+    border-left: 4px solid var(--ca10);
+    border-top: 4px solid var(--ca10);
+    border-right: 4px solid var(--ca8);
+    border-bottom: 4px solid var(--ca8);
+}
+
+
+/* ______________________________________________________________________________  themeClear */
+/* ______________________________________________________________________________  themeClear */
+/* ______________________________________________________________________________  themeClear */
+/* ______________________________________________________________________________  themeClear */
+/* ______________________________________________________________________________  themeClear */
+/* ______________________________________________________________________________  themeClear */
+/* ______________________________________________________________________________  themeClear */
+
+.themeClear .UIISign,
+.themeClear .UIIRange,
+.themeClear .UIICanvas,
+.themeClear .UIIPhaser,
+.themeClear .UIISwitcher,
+.themeClear .UIIButton,
+.themeClear .UIIBorderUp
+{
+    border: 0;
+}
+.themeClear .UIIBorderUpVertical {
+    border: 0;
+}
+.themeClear .UIIBorderDown {
+    border: 0;
+}
+
+.themeClear .UIIInput,
+.themeClear .UIIMultitext,
+.themeClear .UIITextline,
+
+.themeClear .UIIBorderDeep,
+.themeClear .UIIButtonPressed,
+.themeClear .UIIButton:active
+{
+    border: 0;
+}
+
+.themeClear {}
+
+
+/* ______________________________________________________________________________  UIIChart  themeClear           */
+
+.themeClear .UIIChart{
+    /*border: 1px solid var(--cc11);*/
+}
+.themeClear .UIIChart .UIIChartShell{
+    background-color: var(--ca13);
+    border: 1px solid var(--ca11);
+}
+.themeClear .UIIChart .UIIChartLine{
+    background-color: var(--ca8);
+}
+.themeClear .UIIChart .UIIChartLineHaft{
+    background-color: var(--ca7);
+}
+
+
+/* ______________________________________________________________________________  Sign  themeClear               */
+.UIISign {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.UIISignTumbler{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.themeClear .UIISign {
+    /*box-shadow: 1px 1px 4px 0px var(--ca9);*/
+}
+.themeClear .UIISignTumbler{
+    box-shadow: 1px 1px 4px 1px var(--ca11) inset;
+    background-color: var(--ca13);
+}
+.themeClear .UIISignTumblerOn {
+    background: radial-gradient(ellipse 38px 30px, var(--ca8), var(--ca12), var(--ca10));
+}
+.themeClear .UIISignTumblerOff {
+}
+
+
+
+/* ______________________________________________________________________________  Switcher  themeDark           */
+
+.themeDarkBlue .UIISwitcher{
+    background-color: var(--ca10);
+    box-shadow: 1px 1px 4px 0px var(--ca9);
+}
+.themeDarkBlue .UIISwitcherTumbler{
+    height: 26px;
+    background: var(--ca12);
+    box-shadow: 1px 1px 2px 1px var(--ca10) inset;
+}
+.themeDarkBlue .UIISwitcherTumblerOn{
+    background: radial-gradient(ellipse 38px 30px, var(--ca5), var(--ca7), var(--ca9));
+}
+
+/*todo: test*/
+.themeDarkBlue .active1 {
+    color: var(--ca13);
+    background: radial-gradient(ellipse 38px 30px, var(--ca5), var(--ca7), var(--ca9));
+}
+/*todo: test*/
+.themeDarkBlue .active2 {
+    background: linear-gradient(90deg, var(--ca5), var(--ca7), var(--ca9));
+}

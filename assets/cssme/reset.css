@@ -1,0 +1,106 @@
+
+
+
+@layer reset {
+
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    *:focus{outline: none}
+
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+    ul, ol{list-style: none}
+    a{text-decoration: none}
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    input[type="file"]::file-selector-button { }
+    input[type="file"] {appearance: none;}
+
+    a{text-decoration: none;}
+    a:hover{text-decoration: none;}
+    a:active{text-decoration: none;}
+
+    .button,
+    button,
+    select,
+    textarea,
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="button"],
+    input[type="checkbox"],
+    input[type="range"],
+    input[type="radio"],
+    input[type="range"],
+    input[type="image"],
+    input[type="color"],
+    input[type="file"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="search"],
+    input[type="reset"],
+    input[type="submit"],
+    input[type="date"],
+    input[type="week"],
+    input[type="month"],
+    input[type="time"],
+    input[type="url"],
+    input[type="datetime-local"],
+    input[type="datetime"],
+    input[list="browsers"] {
+        border-radius: 0;
+    }
+
+    button, select, .button,
+    input[type="reset"],
+    input[type="submit"] {
+        cursor: pointer;
+        text-align: center;
+    }
+
+    button:hover, .button:hover,
+    input[type="reset"]:hover,
+    input[type="submit"]:hover {}
+
+    button:active, .button:active,
+    input[type="reset"]:active,
+    input[type="submit"]:active {}
+
+    select, select>option{}
+    input[type="radio"],
+    input[type="checkbox"]{}
+    input[type="search"]{}
+    input[type="reset"]{}
+    input[type="file"]{}
+    input[type="color"]{
+        padding: 0;
+    }
+
+    h1{padding: .8rem 0 .5rem}
+    h2{padding: .7rem 0 .4rem}
+    h3{padding: .6rem 0 .3rem}
+    h4{padding: .5rem 0 .2rem}
+    h5{padding: .4rem 0 .1rem}
+    h6{padding: .3rem 0 .1rem}
+    p{padding: .2rem 0 .1rem}
+    pre {
+        white-space: pre-wrap;
+    }
+
+
+
+}

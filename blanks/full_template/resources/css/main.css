@@ -1,0 +1,76 @@
+
+@import url("../../assets/cssme/themescpace.css") layer(themescpace);
+
+@layer main {
+
+
+    * {
+        --inputRound: 0;
+    }
+
+    body, main, #root {
+        overflow: hidden;
+    }
+    .button,
+    button,
+    input, select{
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 0px;
+        padding: 3px;
+    }
+
+    input[type=range]{
+        border: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track{
+        height: 3px;
+        border-radius: 0;
+    }
+    input[type=range]::-webkit-slider-thumb {
+        height: 28px;
+        width: 10px;
+        position: relative;
+        margin-top: -14px;
+        border: solid 0.5px var(--cc2);
+        background: var(--cc4);
+    }
+    input[type=color]{
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        outline: none;
+        border: none;
+    }
+
+    input::placeholder{
+        color: var(--basicBorderColor);
+    }
+    input:not([type=color]):not([type=range]):not([type=checkbox]):not([type=radio]),
+    .button,
+    button,
+    textarea,
+    input[type="file"],
+    input[type="file"]::file-selector-button,
+    select {
+        font: inherit;
+        /*font-size: 14px;*/
+    }
+    [type=color]{
+        padding-top: 3px;
+        height: 27px;
+        width: 24px;
+    }
+
+    @scope (main) {
+
+
+        .notes{
+            font-size: 85%;
+            font-style: italic;
+            color: var(--inputTextColor);
+        }
+
+    }
+
+}

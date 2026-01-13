@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mini-animate demo</title>
+    <link rel="stylesheet" href="animate.css">
+    <style>
+        body, #demoContainer {
+            font-family: system-ui, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+            background: #111;
+            color: #fff;
+        }
+        .demo {
+
+            --animate-duration: 1400ms;
+            --animate-stagger: 80ms;
+            --animation-name: ma-fade-in;
+
+            background: #222;
+            border-radius: .6rem;
+            padding: 1.2rem;
+            width: 160px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: background 1.2s;
+
+            border: 5px solid transparent;
+            border-image: radial-gradient(#252525, #808080);
+            border-image-outset: 5px;
+            border-image-repeat: repeat;
+            border-image-width: 100% 5px;]
+        }
+        .demo:hover {
+            background: #333;
+        }
+
+        .demo span {
+            display: inline-block;
+            font-weight: 600;
+            font-size: .9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="demoContainer"></div>
+
+<script>
+    const anims = [
+        'fadeIn',
+        'fadeOut',
+        'slideInUp',
+        'slideInLeft',
+        'pop',
+        'bounce',
+        'shake',
+        'spin',
+        'flipInY',
+        'reveal'
+    ];
+
+    const container = document.getElementById('demoContainer');
+
+    // container.classList.add('hover-pop');
+    container.classList.add('stagger', 'animated');
+
+    anims.forEach(name => {
+        const div = document.createElement('div');
+        div.className = 'demo';
+        const label = document.createElement('span');
+        label.textContent = name;
+        div.appendChild(label);
+        container.appendChild(div);
+
+        div.classList.add('animated','stagger-item');
+
+        // trigger animation on load + on click
+        const animate = () => {
+            label.classList.remove('animated', name);
+            void label.offsetWidth; // reset
+            label.classList.add('animated', name);
+        };
+        animate();
+        div.addEventListener('click', animate);
+        div.addEventListener('mouseover', animate);
+    });
+</script>
+</body>
+</html>

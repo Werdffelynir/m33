@@ -1,0 +1,129 @@
+
+@font-face {
+    font-family: 'Dusty Pro';
+    src: local('Dusty Pro Regular'), local('Dusty-Pro'),
+    url('fonts/DustyPro/Dusty-Pro.woff') format('woff'),
+    url('fonts/DustyPro/Dusty-Pro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Giger';
+    src: local('Giger'),
+    url('fonts/Giger/Giger.woff') format('woff'),
+    url('fonts/Giger/Giger.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Orpheus';
+    src: local('Orpheus Bold'), local('Orpheus-Bold'),
+    url('fonts/Orpheus/Orpheus-Bold.woff') format('woff'),
+    url('fonts/Orpheus/Orpheus-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Orpheus';
+    src: local('Orpheus'),
+    url('fonts/Orpheus/Orpheus.woff') format('woff'),
+    url('fonts/Orpheus/Orpheus.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Orpheus';
+    src: local('Orpheus Italic'), local('Orpheus-Italic'),
+    url('fonts/Orpheus/Orpheus-Italic.woff') format('woff'),
+    url('fonts/Orpheus/Orpheus-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Play';
+    src: local('Play-Bold'),
+    url('fonts/Play/Play-Bold.woff') format('woff'),
+    url('fonts/Play/Play-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Play';
+    src: local('Play'),
+    url('fonts/Play/Play.woff') format('woff'),
+    url('fonts/Play/Play.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@layer fonts {
+
+    :root{
+        --fontDustyPro: 'Dusty Pro';
+        --fontGiger: 'Giger';
+        --fontOrpheus:  'Orpheus';
+        --fontPlay: 'Play';
+    }
+
+    .font-dusty{
+        font-family: 'Dusty Pro', sans-serif;
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .font-play{
+        font-family: 'Play', sans-serif;
+        font-weight: normal;
+        font-style: normal;
+
+    }
+    .font-play-b{
+        font-family: 'Play', sans-serif;
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    .font-orpheus{
+        font-family: 'Orpheus', sans-serif;
+        font-weight: normal;
+        font-style: normal;
+    }
+    .font-orpheus-b{
+        font-family: 'Orpheus', sans-serif;
+        font-weight: bold;
+        font-style: normal;
+    }
+    .font-orpheus-i{
+        font-family: 'Orpheus', sans-serif;
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    .font-giger{
+        font-family: 'Giger', sans-serif;
+        font-weight: normal;
+        font-style: normal;
+    }
+    .font-giger-b{
+        font-family: 'Giger', sans-serif;
+        font-weight: bold;
+        font-style: normal;
+    }
+
+}
+

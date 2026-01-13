@@ -1,0 +1,123 @@
+import {Doom} from "./Doom.js";
+
+
+export const colors = {
+
+   ca0:  '#f5f5f5',
+   ca1:  '#f0f0f0',
+   ca2:  '#dcdcdc',
+   ca3:  '#c8c8c8',
+   ca4:  '#b4b4b4',
+   ca5:  '#a0a0a0',
+   ca6:  '#8c8c8c',
+   ca7:  '#787878',
+   ca8:  '#646464',
+   ca9:  '#5a5a5a',
+   ca10: '#505050',
+   ca11: '#464646',
+   ca12: '#3c3c3c',
+   ca13: '#373737',
+   ca14: '#323232',
+   ca15: '#2d2d2d',
+   ca16: '#282828',
+   ca17: '#1e1e1e',
+   ca18: '#141414',
+   ca19: '#0a0a0a',
+
+   cc0: '#becee0',
+   cc1: '#a7b7c9',
+   cc2: '#95a3b2',
+   cc3: '#7391b4',
+   cc4: '#6682a2',
+   cc5: '#5b7593',
+   cc6: '#516985',
+   cc7: '#4a6079',
+   cc8: '#40556c',
+   cc9: '#3a4f65',
+   cc10: '#33465b',
+   cc11: '#2c3e52',
+   cc12: '#28394b',
+   cc13: '#243342',
+   cc14: '#21303f',
+   cc15: '#1e2b38',
+   cc16: '#1f282f',
+   cc17: '#21272a',
+   cc18: '#1d2225',
+   cc19: '#16191c',
+   cc20: '#0c0f10',
+
+   cr1: `#fcfcd0`,
+   cr2: `#fafaa6`,
+   cr3: `#ffe969`,
+   cr4: `#f5f51b`,
+   cr5: `#ccd324`,
+   cr6: `#f8a303`,
+   cr7: `#d58b00`,
+   cr8: `#be7d01`,
+   cr9: `#ad7204`,
+   cr10: `#986404`,
+   cr11: `#855805`,
+   cr12: `#734d05`,
+   cr13: `#644305`,
+   cr14: `#573a04`,
+   cr15: `#4f3505`,
+   cr16: `#422d05`,
+   cr17: `#342405`,
+   cr18: `#2a1d05`,
+   cr19: `#171003`,
+
+   cg0: `#faff99`,
+   cg1: `#f9ff6b`,
+   cg2: `#f1ff42`,
+   cg3: `#f3ff5a`,
+   cg4: `#dae362`,
+   cg5: `#bdc464`,
+   cg6: `#bdc464`,
+   cg7: `#9ca464`,
+   cg8: `#82885c`,
+   cg9: `#5d725d`,
+   cg10: `#545e54`,
+   cg11: `#4b544b`,
+   cg12: `#484f48`,
+   cg13: `#424642`,
+   cg14: `#393b39`,
+   cg15: `#363836`,
+   cg16: `#313331`,
+   cg17: `#2a2c2a`,
+   cg18: `#282a28`,
+   cg19: `#1d1f1d`,
+   cg20: `#151715`,
+   cg21: `#121312`,
+
+   cb0: `#70c5fa`,
+   cb1: `#5a99f6`,
+   cb2: `#498cee`,
+   cb3: `#3a7ad9`,
+   cb4: `#3b74c9`,
+   cb5: `#3d6eb7`,
+   cb6: `#3d67a6`,
+   cb7: `#3b6098`,
+   cb8: `#395785`,
+   cb9: `#364f75`,
+   cb10: `#334867`,
+   cb11: `#2e3f57`,
+   cb12: `#283446`,
+   cb13: `#222b38`,
+   cb14: `#1b212a`,
+   cb15: `#161a21`,
+   cb16: `#111418`,
+   cb17: `#0d0e11`,
+
+}
+
+export const createColorsCSS = function () {
+   let css = `:root {\n`
+   Object.keys(colors).forEach(name => {
+      css += `--${name}: ${colors[name]};\n`
+   })
+   css += '}\n'
+   Doom.Styles.addStyleElement('ColorsCSS', css)
+}
+export const cssVar = function (cssVarName) {
+   return Doom.CSSVariable.get(`--${cssVarName}`);
+}

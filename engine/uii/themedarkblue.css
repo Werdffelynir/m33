@@ -1,0 +1,278 @@
+
+@import url('./uii.css') layer(uii);
+
+@layer themedarkblue {
+
+
+    /* ______________________________________________________________________________  Basic themeDarkBlue               */
+    .themeDarkBlue .UIIDesktop, .themeDarkBlue.UIIDesktop {
+        background-color: var(--cc10);
+    }
+
+    .themeDarkBlue .UIIPad, .themeDarkBlue.UIIPad {
+        background-color: var(--cc10);
+    }
+
+    .themeDarkBlue .UIIDesktop, .themeDarkBlue.UIIDesktop, .themeDarkBlue .UIIPad, .themeDarkBlue.UIIPad {
+        border: var(--cc12) solid 1px;
+        box-shadow: 1px 1px 4px 0px var(--cc9);
+    }
+
+
+    /* ______________________________________________________________________________  Hint  themeDarkBlue               */
+    .themeDarkBlue .UIIHint {
+        background-color: var(--cc10);
+        border: var(--cc4) solid 1px;
+        box-shadow: 1px 1px 4px 0px var(--cc9);
+        color: var(--cc2);
+    }
+
+
+    /* ______________________________________________________________________________  UIIInput UIIMultitext themeDarkBlue*/
+    .themeDarkBlue .UIIInput {
+        color: var(--cc12);
+        background-color: var(--cc10);
+        /*box-shadow: 4px 4px 16px -2px var(--cc13) inset;*/
+    }
+
+    .themeDarkBlue [contenteditable].UIIInput,
+    .themeDarkBlue .UIIInputLED {
+        color: var(--cc14);
+        background: radial-gradient(ellipse 180% 110%, var(--cc5), var(--cc7), var(--cc9));
+        /*box-shadow: 4px 4px 16px -2px var(--cc13) inset;*/
+        /*text-shadow: 0px 1px 2px var(--cc12) ;*/
+    }
+
+
+    /* ______________________________________________________________________________  Button themeDarkBlue              */
+    .themeDarkBlue .UIILink {
+        color: var(--cc10);
+    }
+
+    .themeDarkBlue .UIILink:hover {
+        color: var(--cc12);
+        text-decoration: underline;
+    }
+
+    .themeDarkBlue .UIIButton {
+        background-color: var(--cc13);
+    }
+
+    .themeDarkBlue .UIIButton:hover {
+        /*color: var(--cc1);*/
+    }
+
+    .themeDarkBlue .UIIButton:active,
+    .themeDarkBlue .UIIButtonPressed /* see uiBorderDeep */
+    {
+        color: var(--cc5);
+        border-left: 4px solid var(--cc10);
+        border-top: 4px solid var(--cc10);
+        border-right: 4px solid var(--cc12);
+        border-bottom: 4px solid var(--cc12);
+        background-color: var(--cc10);
+    }
+
+
+    /* ______________________________________________________________________________  Sign  themeDarkBlue               */
+    .themeDarkBlue .UIISign {
+        box-shadow: 1px 1px 4px 0px var(--cc9);
+    }
+
+    .themeDarkBlue .UIISignTumbler {
+        box-shadow: 1px 1px 4px 1px var(--cc10) inset;
+        background-color: var(--cc13);
+    }
+
+    .themeDarkBlue .UIISignTumblerOn {
+        background: radial-gradient(ellipse 38px 30px, var(--cc5), var(--cc7), var(--cc9));
+    }
+
+    .themeDarkBlue .UIISignTumblerOff {
+    }
+
+
+    /* ______________________________________________________________________________  Range     themeDarkBlue           */
+    .themeDarkBlue .UIIRangeShell {
+        background-color: var(--cc11);
+    }
+
+    .themeDarkBlue .UIIRangeLine {
+        background: var(--cc5);
+        box-shadow: 1px 1px 4px 1px var(--cc11) inset;
+    }
+
+    .themeDarkBlue .UIIRangeHaftShow .UIIRangeLineHaft {
+        background: var(--cc5);
+        border-left: 2px solid var(--cc9);
+        box-shadow: 0px 0px 5px 1px var(--cc9) inset;
+    }
+
+    .themeDarkBlue .UIIRangeVertical[data-ui] {
+        border-right: 4px solid var(--cc12);
+        border-top: 4px solid var(--cc12);
+        border-left: 4px solid var(--cc10);
+        border-bottom: 4px solid var(--cc10);
+    }
+
+
+    /* ______________________________________________________________________________  Canvas     themeDarkBlue          */
+    .themeDarkBlue .UIICanvas {
+        background: var(--cc11);
+    }
+
+
+    /* ______________________________________________________________________________  Phaser     themeDarkBlue          */
+    .themeDarkBlue .UIIPhaserBean {
+        color: var(--cc2);
+        background-color: var(--cc10);
+
+        /*border-left: var(--cc10) solid 2px;*/
+        /*border-bottom:  var(--cc11) solid 2px;*/
+    }
+
+    .themeDarkBlue .UIIPhaserBeanDeactivated {
+        color: var(--cc6);
+        background-color: var(--cc12);
+    }
+
+    .themeDarkBlue .UIIPhaserBeanOn {
+        /*box-shadow: 0px 0px 6px 2px var(--cc10) inset,  2px 2px 2px 1px var(--cc12) inset;*/
+
+        color: var(--cc9);
+        background-color: var(--cc5);
+    }
+
+    .themeDarkBlue .UIIPhaserShell .UIIPhaserBean:hover,
+    .themeDarkBlue .vertical.UIIPhaserShell .UIIPhaserBean:hover {
+        background-color: var(--cc13);
+    }
+
+    .themeDarkBlue .UIIPhaserShell .UIIPhaserBeanOn:active,
+    .themeDarkBlue .vertical.UIIPhaserShell .UIIPhaserBean:active {
+        /*border-left: var(--cc11) solid 2px;*/
+        /*border-top:  var(--cc11) solid 2px;*/
+    }
+
+    .themeDarkBlue .UIIPhaserShell .UIIPhaserBeanOn:hover {
+        background-color: var(--cc5);
+    }
+
+    .themeDarkBlue .vertical.UIIPhaserShell .UIIPhaserBean:hover {
+    }
+
+
+    /* ______________________________________________________________________________  UIIChart  themeDarkBlue           */
+    .themeDarkBlue .UIIChart {
+        /*border: 1px solid var(--cc11);*/
+    }
+
+    .themeDarkBlue .UIIChart .UIIChartShell {
+        background-color: var(--cc13);
+        border: 1px solid var(--cc11);
+    }
+
+    .themeDarkBlue .UIIChart .UIIChartLine {
+        background-color: var(--cc8);
+    }
+
+    .themeDarkBlue .UIIChart .UIIChartLineHaft {
+        background-color: var(--cc7);
+    }
+
+
+    /* ______________________________________________________________________________  Switcher  themeDarkBlue           */
+    .themeDarkBlue .UIISwitcher {
+        background-color: var(--cc10);
+        box-shadow: 1px 1px 4px 0px var(--cc9);
+    }
+
+    .themeDarkBlue .UIISwitcherTumbler {
+        height: 26px;
+        background: var(--cc12);
+        box-shadow: 1px 1px 2px 1px var(--cc10) inset;
+    }
+
+    .themeDarkBlue .UIISwitcherTumblerOn {
+        background: radial-gradient(ellipse 38px 30px, var(--cc5), var(--cc7), var(--cc9));
+    }
+
+    /*todo: test*/
+    .themeDarkBlue .active1 {
+        color: var(--cc13);
+        background: radial-gradient(ellipse 38px 30px, var(--cc5), var(--cc7), var(--cc9));
+    }
+
+    /*todo: test*/
+    .themeDarkBlue .active2 {
+        background: linear-gradient(90deg, var(--cc5), var(--cc7), var(--cc9));
+    }
+
+
+    /* ______________________________________________________________________________  UIIOptioner  themeDarkBlue         */
+    .UIIOptioner {
+        background-color: var(--cc15);
+        border: 1px solid var(--cc11);
+    }
+
+    .UIIOptioner .options {
+        background-color: var(--cc16);
+        border: 1px solid var(--cc11);
+    }
+
+    .UIIOptioner .options:not(.UIIOptionerDisabled) .option:hover,
+    .UIIOptionActive {
+        background-color: var(--cc6);
+        color: var(--cc16);
+    }
+
+    .UIIOptioner .UIIOptionerDisabled {
+        background-color: var(--cc16);
+        color: var(--cc11);
+    }
+
+    .UIIOptioner .UIIOptionerDisabled .options {
+        color: var(--cc11);
+    }
+
+
+    /* ______________________________________________________________________________  Borders    themeDarkBlue       */
+    .themeDarkBlue .UIISign,
+    .themeDarkBlue .UIIRange,
+    .themeDarkBlue .UIICanvas,
+    .themeDarkBlue .UIIPhaser,
+    .themeDarkBlue .UIISwitcher,
+    .themeDarkBlue .UIIButton,
+    .themeDarkBlue .UIIBorderUp {
+        border-left: 4px solid var(--cc12);
+        border-top: 4px solid var(--cc12);
+        border-right: 4px solid var(--cc10);
+        border-bottom: 4px solid var(--cc10);
+    }
+
+    .themeDarkBlue .UIIBorderUpVertical {
+        border-left: 4px solid var(--cc10);
+        border-top: 4px solid var(--cc12);
+        border-right: 4px solid var(--cc12);
+        border-bottom: 4px solid var(--cc10);
+    }
+
+    .themeDarkBlue .UIIBorderDown {
+        border-left: 4px solid var(--cc13);
+        border-top: 4px solid var(--cc13);
+        border-right: 4px solid var(--cc12);
+        border-bottom: 4px solid var(--cc12);
+    }
+
+    .themeDarkBlue .UIIInput,
+    .themeDarkBlue .UIIMultitext,
+    .themeDarkBlue .UIITextline,
+    .themeDarkBlue .UIIBorderDeep,
+    .themeDarkBlue .UIIButtonPressed {
+        border-left: 4px solid var(--cc10);
+        border-top: 4px solid var(--cc10);
+        border-right: 4px solid var(--cc12);
+        border-bottom: 4px solid var(--cc12);
+    }
+
+}

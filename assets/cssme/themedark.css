@@ -1,0 +1,381 @@
+
+@layer themedark {
+    :root{
+        --basicTextColor:  var(--cc1);
+        --basicBackgroundColor:  var(--ca17);
+        --basicBorderColor:  var(--cc12);
+        
+        --buttonTextColor:  var(--cc14);
+        --buttonBackgroundColor:  var(--cc5);
+
+        --inputTextColor:  var(--cc3);
+        --inputBackgroundColor:  var(--cc14);
+    }
+
+    /* Style the entire scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+        background-color: var(--cc14);
+    }
+
+    /* Style the scrollbar track */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px  color-mix(in oklch, var(--cc16) 70%, transparent);
+        cursor: pointer;
+        background-color: var(--cc18);
+    }
+
+    /* Style the scrollbar thumb */
+    ::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        cursor: pointer;
+        background-color: var(--cc12);
+    }
+
+    /* Style the scrollbar thumb on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--cc8);
+    }
+
+
+
+    html, body, body>*{
+        background: var(--cc17);
+        color: var(--cc2);
+        font-family: system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+        color-scheme: dark light;
+    }
+
+
+    /*
+    *
+    * GLOBAL INPUTS SETTINGS
+    *
+    */
+    input::placeholder{
+        color: var(--basicBorderColor);
+    }
+    input:not([type="color"]):not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+    .button,
+    button,
+    textarea,
+    input[type="file"],
+    input[type="file"]::file-selector-button,
+    select {
+        font: inherit;
+        outline: none;
+        border-radius: var(--inputRound);
+        transition: border-color .2s, background-color .2s;
+    }
+
+    .button,
+    button,
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="url"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="search"],
+    input[type="button"],
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="reset"],
+    input[type="submit"],
+    input[type="date"],
+    input[type="week"],
+    input[type="month"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="datetime"]{
+        padding: var(--innerPadding);
+        height: var(--basicHeight);
+    }
+
+    input[type="date"],
+    input[type="week"],
+    input[type="month"],
+    input[type="time"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    select,
+    textarea,
+    [contenteditable],
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="url"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="search"]{
+        border: 1px solid var(--basicBorderColor);
+        background-color: var(--inputBackgroundColor);
+        color: var(--inputTextColor);
+    }
+
+    input[type=range],
+    textarea
+    {
+
+    }
+
+
+
+    /*
+    *
+    * BUTTONS COMMON
+    *
+    */
+    input[type="reset"],
+    input[type="submit"],
+    input[type="button"],
+    input[type="file"]::file-selector-button,
+    .button,
+    button {
+        cursor: pointer;
+        padding: var(--innerPadding)  ;
+        border: 1px solid var(--basicBorderColor);
+        background-color: var(--buttonBackgroundColor);
+        color: var(--buttonTextColor);
+    }
+
+    input[type="reset"]:active,
+    input[type="submit"]:active,
+    input[type="button"]:active,
+    input[type="file"]::file-selector-button:active,
+    .button:active,
+    button:active {
+        background-color: var(--buttonTextColor);
+        color: var(--buttonBackgroundColor);
+    }
+
+
+
+    /*
+    *
+    * COLOR PICKER
+    *
+    */
+    input[type="color"]{
+        background-color: inherit;
+        width: var(--inputWidth);
+        border-radius: var(--inputRound);
+    }
+
+
+    /*
+    *
+    * RANGE
+    *
+    */
+    input[type=range] {
+        height: 30px;
+    }
+    input[type=range]::-webkit-slider-runnable-track{
+        width: var(--inputWidth);
+        height: 20px;
+        border-radius: var(--inputRound);
+        outline: 1px solid var(--basicBorderColor);
+        background-color: var(--buttonTextColor);
+    }
+    input[type=range]::-webkit-slider-thumb {
+        height: 18px;
+        width: 10px;
+        position: relative;
+        margin-top: 0px;
+        background-color: var(--buttonBackgroundColor);
+        border-radius: var(--inputRound);
+    }
+    input[type=range]::-webkit-slider-thumb {
+        transform: translateY(1px);
+    }
+
+
+    input[type=range].range2::-webkit-slider-runnable-track {
+        height: 6px;
+    }
+    input[type=range].range2::-webkit-slider-thumb {
+        height: 24px;
+        width: 10px;
+        position: relative;
+        margin-top: -10px;
+    }
+
+
+    input[type=range].range3::-webkit-slider-runnable-track {
+        height: 20px;
+        background: repeating-linear-gradient(
+                90deg,
+                var(--basicBorderColor) 0 1px,
+                var(--basicBackgroundColor) 2px 10%);
+    }
+    input[type=range].range3::-webkit-slider-thumb {
+        height: 30px;
+        width: 10px;
+        position: relative;
+        margin-top: -6px;
+    }
+
+
+
+
+    /*
+    *
+    * CHECKBOX
+    *
+    * RADIO
+    *
+    */
+    input[type="checkbox"],
+    input[type="radio"]{
+        appearance: none;
+        -webkit-appearance: none;
+        outline: none;
+        place-content: center;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        margin: 0;
+
+        width: var(--basicHeight);
+        height: var(--basicHeight);
+        border: 2px solid var(--basicBorderColor);
+        border-radius: var(--inputRound);
+        background: var(--basicBackgroundColor);
+        display: grid;
+    }
+    input[type="checkbox"],
+    input[type="radio"] {
+        box-shadow: 0 0 0 transparent;
+    }
+    input[type="checkbox"]:checked ,
+    input[type="radio"]:checked {
+        background: var(--buttonBackgroundColor);
+        box-shadow: 0 0 12px var(--basicBorderColor);
+        border-color: var(--buttonTextColor);
+    }
+    input[type="checkbox"]::before,
+    input[type="radio"]::before {
+        content: "*";
+        display: block;
+        width: calc(var(--basicHeight) - 10px);
+        height: calc(var(--basicHeight) - 2px);
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        background: var(--buttonTextColor);
+        transform: scale(0);
+        opacity: 0;
+        transition: all 0.2s;
+    }
+    input[type="checkbox"]:checked::before,
+    input[type="radio"]:checked::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+    /*
+    *
+    * SELECT
+    *
+    */
+    select:not([multiple]) {
+        appearance:none;
+        padding-right:2.2rem;
+        background:
+                conic-gradient(from 45deg, var(--inputBackgroundColor) 0 90deg, transparent 0 360deg)
+                right .8rem center / 1.8rem .7rem no-repeat;
+    }
+    select {
+        background-color: var(--inputBackgroundColor);
+        border: 3px solid var(--basicBorderColor);
+        color: var(--inputTextColor);;
+    }
+    select option{
+        background-color: var(--inputBackgroundColor);
+        color: var(--inputTextColor);
+        transition: all 0.2s;
+        /*padding: var(--innerPadding);*/
+    }
+
+    select:not([multiple]) {
+
+    }
+
+
+
+
+    /*
+    *
+    * FOCUS
+    *
+    */
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: color-mix(in srgb, var(--basicBorderColor), transparent 50%);
+    }
+
+    button, textarea, select:focus-visible {
+        outline: 2px solid color-mix(in srgb, var(--basicTextColor), transparent 80%);
+        outline-offset: 2px;
+    }
+
+
+
+
+    /*
+    *
+    *
+    *
+    */
+    [popover]{
+        background-color: var(--inputBackgroundColor);
+        border: 1px solid var(--basicBorderColor);
+        color: var(--inputTextColor);
+    }
+    [popover]:popover-open {
+        position: absolute;
+        inset: unset;
+        margin: 0;
+    }
+
+
+
+
+    /*
+    *
+    * DEFAULT ELEMENTS
+    *
+    */
+
+    label{font-size: 95%;}
+
+    a, .link {
+        color: var(--inputTextColor);
+    }
+    a:hover, .link:hover {
+        color: color-mix(in srgb, var(--basicTextColor) 80%, transparent);
+        text-decoration: underline;
+    }
+
+    blockquote{
+        background-color: color-mix(in srgb, var(--inputBackgroundColor) 40%, transparent);
+        border: 1px solid var(--basicBorderColor);
+        color: var(--inputTextColor);
+        font-size: 96%;
+        padding: var(--innerPadding);
+    }
+
+    code, pre{
+        font-family: var(--fontFamilyMono), serif;
+        font-size: 90%;
+        color: var(--inputTextColor);
+    }
+
+
+
+
+}
+
+
+
+

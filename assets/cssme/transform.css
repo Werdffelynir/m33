@@ -1,0 +1,163 @@
+
+@layer transform {
+
+    .tf {
+        transform: none;
+        transform-style: preserve-3d;
+        transition: transform 0.5s ease;
+        position: relative;
+    }
+
+    [class^="tx-"], [class*=" tx-"] { --tx: 0; transform: translateX(var(--tx)); }
+    [class^="ty-"], [class*=" ty-"] { --ty: 0; transform: translateY(var(--ty)); }
+    [class^="tz-"], [class*=" tz-"] { --tz: 0; transform: translateZ(var(--tz)); }
+
+    [class^="rx-"], [class*=" rx-"] { --rx: 0; transform: rotateX(var(--rx)); }
+    [class^="ry-"], [class*=" ry-"] { --ry: 0; transform: rotateY(var(--ry)); }
+    [class^="rz-"], [class*=" rz-"] { --rz: 0; transform: rotateZ(var(--rz)); }
+
+    [class^="sx-"], [class*=" sx-"] { --sx: 1; transform: scaleX(var(--sx)); }
+    [class^="sy-"], [class*=" sy-"] { --sy: 1; transform: scaleY(var(--sy)); }
+    [class^="sz-"], [class*=" sz-"] { --sz: 1; transform: scaleZ(var(--sz)); }
+
+    .tf-3d { perspective: 800px; perspective-origin: 50% 50%; transform-style: preserve-3d; }
+    .tf-reset { transform: none !important; }
+
+    .tf-smooth { transition: transform 1.3s ease; }
+    .tf-fast { transition: transform 0.81s linear; }
+
+    .tx-1 { --tx: 10px; transform: translateX(var(--tx)); }
+    .tx-2 { --tx: 20px; transform: translateX(var(--tx)); }
+    .tx-3 { --tx: 30px; transform: translateX(var(--tx)); }
+    .tx-4 { --tx: 40px; transform: translateX(var(--tx)); }
+    .tx-5 { --tx: 50px; transform: translateX(var(--tx)); }
+    .tx-6 { --tx: 60px; transform: translateX(var(--tx)); }
+    .tx-7 { --tx: 70px; transform: translateX(var(--tx)); }
+    .tx-8 { --tx: 80px; transform: translateX(var(--tx)); }
+    .tx-9 { --tx: 90px; transform: translateX(var(--tx)); }
+    .tx-10 { --tx: 100px; transform: translateX(var(--tx)); }
+    .tx-20 { --tx: 200px; transform: translateX(var(--tx)); }
+    .tx-30 { --tx: 300px; transform: translateX(var(--tx)); }
+    .tx-40 { --tx: 400px; transform: translateX(var(--tx)); }
+    .tx-50 { --tx: 500px; transform: translateX(var(--tx)); }
+
+    .ty-1 { --ty: 10px; transform: translateY(var(--ty)); }
+    .ty-2 { --ty: 20px; transform: translateY(var(--ty)); }
+    .ty-3 { --ty: 30px; transform: translateY(var(--ty)); }
+    .ty-4 { --ty: 40px; transform: translateY(var(--ty)); }
+    .ty-5 { --ty: 50px; transform: translateY(var(--ty)); }
+    .ty-6 { --ty: 60px; transform: translateY(var(--ty)); }
+    .ty-7 { --ty: 70px; transform: translateY(var(--ty)); }
+    .ty-8 { --ty: 80px; transform: translateY(var(--ty)); }
+    .ty-9 { --ty: 90px; transform: translateY(var(--ty)); }
+    .ty-10 { --ty: 100px; transform: translateY(var(--ty)); }
+    .ty-20 { --ty: 200px; transform: translateY(var(--ty)); }
+    .ty-30 { --ty: 300px; transform: translateY(var(--ty)); }
+    .ty-40 { --ty: 400px; transform: translateY(var(--ty)); }
+    .ty-50 { --ty: 500px; transform: translateY(var(--ty)); }
+
+    .tz-1 { --tz: 10px; transform: translateZ(var(--tz)); }
+    .tz-2 { --tz: 20px; transform: translateZ(var(--tz)); }
+    .tz-3 { --tz: 30px; transform: translateZ(var(--tz)); }
+    .tz-4 { --tz: 40px; transform: translateZ(var(--tz)); }
+    .tz-5 { --tz: 50px; transform: translateZ(var(--tz)); }
+    .tz-6 { --tz: 60px; transform: translateZ(var(--tz)); }
+    .tz-7 { --tz: 70px; transform: translateZ(var(--tz)); }
+    .tz-8 { --tz: 80px; transform: translateZ(var(--tz)); }
+    .tz-9 { --tz: 90px; transform: translateZ(var(--tz)); }
+    .tz-10 { --tz: 100px; transform: translateZ(var(--tz)); }
+    .tz-20 { --tz: 200px; transform: translateZ(var(--tz)); }
+    .tz-30 { --tz: 300px; transform: translateZ(var(--tz)); }
+    .tz-40 { --tz: 400px; transform: translateZ(var(--tz)); }
+    .tz-50 { --tz: 500px; transform: translateZ(var(--tz)); }
+
+    .rz-0 { --rz: 0deg; transform: rotateZ(var(--rz)); }
+    .rz-5 { --rz: 5deg; transform: rotateZ(var(--rz)); }
+    .rz-10 { --rz: 10deg; transform: rotateZ(var(--rz)); }
+    .rz-15 { --rz: 15deg; transform: rotateZ(var(--rz)); }
+    .rz-20 { --rz: 20deg; transform: rotateZ(var(--rz)); }
+    .rz-25 { --rz: 25deg; transform: rotateZ(var(--rz)); }
+    .rz-30 { --rz: 30deg; transform: rotateZ(var(--rz)); }
+    .rz-35 { --rz: 35deg; transform: rotateZ(var(--rz)); }
+    .rz-40 { --rz: 40deg; transform: rotateZ(var(--rz)); }
+    .rz-45 { --rz: 45deg; transform: rotateZ(var(--rz)); }
+    .rz-90 { --rz: 90deg; transform: rotateZ(var(--rz)); }
+    .rz-95 { --rz: 95deg; transform: rotateZ(var(--rz)); }
+    .rz-100 { --rz: 100deg; transform: rotateZ(var(--rz)); }
+    .rz-300 { --rz: 300deg; transform: rotateZ(var(--rz)); }
+    .rz-305 { --rz: 305deg; transform: rotateZ(var(--rz)); }
+    .rz-310 { --rz: 310deg; transform: rotateZ(var(--rz)); }
+    .rz-315 { --rz: 315deg; transform: rotateZ(var(--rz)); }
+    .rz-320 { --rz: 320deg; transform: rotateZ(var(--rz)); }
+    .rz-325 { --rz: 325deg; transform: rotateZ(var(--rz)); }
+    .rz-330 { --rz: 330deg; transform: rotateZ(var(--rz)); }
+    .rz-335 { --rz: 335deg; transform: rotateZ(var(--rz)); }
+    .rz-340 { --rz: 340deg; transform: rotateZ(var(--rz)); }
+    .rz-345 { --rz: 345deg; transform: rotateZ(var(--rz)); }
+    .rz-350 { --rz: 350deg; transform: rotateZ(var(--rz)); }
+    .rz-355 { --rz: 355deg; transform: rotateZ(var(--rz)); }
+    .rz-360 { --rz: 360deg; transform: rotateZ(var(--rz)); }
+
+    .rx-0 { --rx: 0deg; transform: rotateX(var(--rx)); }
+    .rx-5 { --rx: 5deg; transform: rotateX(var(--rx)); }
+    .rx-10 { --rx: 10deg; transform: rotateX(var(--rx)); }
+    .rx-15 { --rx: 15deg; transform: rotateX(var(--rx)); }
+    .rx-20 { --rx: 20deg; transform: rotateX(var(--rx)); }
+    .rx-25 { --rx: 25deg; transform: rotateX(var(--rx)); }
+    .rx-30 { --rx: 30deg; transform: rotateX(var(--rx)); }
+    .rx-35 { --rx: 35deg; transform: rotateX(var(--rx)); }
+    .rx-40 { --rx: 40deg; transform: rotateX(var(--rx)); }
+    .rx-45 { --rx: 45deg; transform: rotateX(var(--rx)); }
+    .rx-90 { --rx: 90deg; transform: rotateX(var(--rx)); }
+    .rx-95 { --rx: 95deg; transform: rotateX(var(--rx)); }
+    .rx-100 { --rx: 100deg; transform: rotateX(var(--rx)); }
+    .rx-300 { --rx: 300deg; transform: rotateX(var(--rx)); }
+    .rx-305 { --rx: 305deg; transform: rotateX(var(--rx)); }
+    .rx-310 { --rx: 310deg; transform: rotateX(var(--rx)); }
+    .rx-315 { --rx: 315deg; transform: rotateX(var(--rx)); }
+    .rx-320 { --rx: 320deg; transform: rotateX(var(--rx)); }
+    .rx-325 { --rx: 325deg; transform: rotateX(var(--rx)); }
+    .rx-330 { --rx: 330deg; transform: rotateX(var(--rx)); }
+    .rx-335 { --rx: 335deg; transform: rotateX(var(--rx)); }
+    .rx-340 { --rx: 340deg; transform: rotateX(var(--rx)); }
+    .rx-345 { --rx: 345deg; transform: rotateX(var(--rx)); }
+    .rx-350 { --rx: 350deg; transform: rotateX(var(--rx)); }
+    .rx-355 { --rx: 355deg; transform: rotateX(var(--rx)); }
+    .rx-360 { --rx: 360deg; transform: rotateX(var(--rx)); }
+
+    .ry-0 { --ry: 0deg; transform: rotateY(var(--ry)); }
+    .ry-5 { --ry: 5deg; transform: rotateY(var(--ry)); }
+    .ry-10 { --ry: 10deg; transform: rotateY(var(--ry)); }
+    .ry-15 { --ry: 15deg; transform: rotateY(var(--ry)); }
+    .ry-20 { --ry: 20deg; transform: rotateY(var(--ry)); }
+    .ry-25 { --ry: 25deg; transform: rotateY(var(--ry)); }
+    .ry-30 { --ry: 30deg; transform: rotateY(var(--ry)); }
+    .ry-35 { --ry: 35deg; transform: rotateY(var(--ry)); }
+    .ry-40 { --ry: 40deg; transform: rotateY(var(--ry)); }
+    .ry-45 { --ry: 45deg; transform: rotateY(var(--ry)); }
+    .ry-90 { --ry: 90deg; transform: rotateY(var(--ry)); }
+    .ry-95 { --ry: 95deg; transform: rotateY(var(--ry)); }
+    .ry-100 { --ry: 100deg; transform: rotateY(var(--ry)); }
+    .ry-300 { --ry: 300deg; transform: rotateY(var(--ry)); }
+    .ry-305 { --ry: 305deg; transform: rotateY(var(--ry)); }
+    .ry-310 { --ry: 310deg; transform: rotateY(var(--ry)); }
+    .ry-315 { --ry: 315deg; transform: rotateY(var(--ry)); }
+    .ry-320 { --ry: 320deg; transform: rotateY(var(--ry)); }
+    .ry-325 { --ry: 325deg; transform: rotateY(var(--ry)); }
+    .ry-330 { --ry: 330deg; transform: rotateY(var(--ry)); }
+    .ry-335 { --ry: 335deg; transform: rotateY(var(--ry)); }
+    .ry-340 { --ry: 340deg; transform: rotateY(var(--ry)); }
+    .ry-345 { --ry: 345deg; transform: rotateY(var(--ry)); }
+    .ry-350 { --ry: 350deg; transform: rotateY(var(--ry)); }
+    .ry-355 { --ry: 355deg; transform: rotateY(var(--ry)); }
+    .ry-360 { --ry: 360deg; transform: rotateY(var(--ry)); }
+
+    .sx-05 { --sx: 0.5; transform: scaleX(var(--sx)); }
+    .sy-05 { --sy: 0.5; transform: scaleY(var(--sy)); }
+    .sz-05 { --sz: 0.5; transform: scaleZ(var(--sz)); }
+
+    .sx-2 { --sx: 2; transform: scaleX(var(--sx)); }
+    .sy-2 { --sy: 2; transform: scaleY(var(--sy)); }
+    .sz-2 { --sz: 2; transform: scaleZ(var(--sz)); }
+
+}

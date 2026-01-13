@@ -1,0 +1,17 @@
+
+@import url("./../../assets/cssme/themescpace.css") layer(themescpace);
+
+@layer main {
+
+    * {
+    }
+
+    body, main, #root {
+        overflow: hidden;
+    }
+
+    @scope (main) {
+
+    }
+
+}
