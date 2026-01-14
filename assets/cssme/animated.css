@@ -1,41 +1,7 @@
 
 
-/**
-For parent element
-animated
-animated.fast
-animated.slow
-animated.infinite
-animated.pause
-animated.reverse
 
-delay-xs
-delay-sm
-delay-md
-delay-lg
-
-For children:
-fadeIn
-fadeOut
-slideInUp
-slideInLeft
-pop
-bounce
-shake
-spin
-flipInY
-reveal
-pop-hover
-bounce-hover
-
-
-stagger .stagger-item
-
-
- */
-@layer animate {
-
-    /* mini-animate.css — minimal modern animation utils */
+@layer animated {
 
     /* -- defaults */
     :root{
