@@ -1,11 +1,11 @@
-import {ReaComponent} from "../../../engine/ReaComponent.js";
+import {ReaComponent} from "engine/ReaComponent.js";
 import {GridDecor} from "../../actors/GridDecor.js";
-import {Actor} from "../../../engine/canvas2d/Actor.js";
-import {LayerManager} from "../../../engine/LayerManager.js";
-import {MouseManager} from "../../../engine/MouseManager.js";
-import {Camera} from "../../../engine/canvas2d/Camera.js";
-import {SPECTACLE_STATUS} from "../../../engine/Spectacle.js";
-import {AnimationLoop} from "../../../engine/AnimationLoop.js";
+import {Actor} from "engine/canvas2d/Actor.js";
+import {LayerManager} from "engine/LayerManager.js";
+import {MouseManager} from "engine/MouseManager.js";
+import {Camera} from "engine/canvas2d/Camera.js";
+import {AnimationLoop} from "engine/AnimationLoop.js";
+import {STATUSES} from "../../../../../engine/Register.js";
 
 
 const CSS_CENTRAL = `
@@ -155,7 +155,7 @@ export class BasicSandboxComponent extends ReaComponent {
             // const camera = this.camera;
             // console.log('drag', this.camera)
 
-            if (!this.mouseman.draggableOn || this.register.state.status !== SPECTACLE_STATUS.PLAYING) return;
+            if (!this.mouseman.draggableOn || this.register.state.status !== STATUSES.PLAYING) return;
             // mouse.right
             if (this.mouseman.mouse['right']) {
                 let x = this.camera.x - this.mouseman.mouse.drag.x / this.camera.zoom;
@@ -171,7 +171,7 @@ export class BasicSandboxComponent extends ReaComponent {
         // Scroll wheel. Camera zoom
         this.mouseman.addListener('wheel', (mouse, event) => {
             console.log('456', this.mouseman.scalingOn, this.register.state.status)
-            if (!this.mouseman.scalingOn || this.register.state.status !== SPECTACLE_STATUS.PLAYING) return;
+            if (!this.mouseman.scalingOn || this.register.state.status !== STATUSES.PLAYING) return;
 
             if (event.deltaY > 0) {
                 this.camera.zoomOut();
@@ -210,12 +210,12 @@ export class BasicSandboxComponent extends ReaComponent {
                         this.elements['canvases'].classList.remove('active');
                         this.loopman.stop('global')
                         this.state.isStarted = false;
-                        this.register.state.status = SPECTACLE_STATUS.PAUSED
+                        this.register.state.status = STATUSES.PAUSED
                     } else {
                         this.elements['canvases'].classList.add('active');
                         this.loopman.start('global')
                         this.state.isStarted = true;
-                        this.register.state.status = SPECTACLE_STATUS.PLAYING
+                        this.register.state.status = STATUSES.PLAYING
                     }
                 },
                 title: this.constructor.name,
@@ -323,7 +323,7 @@ export const SandboxControl = {
         mouseman: {},
         wheel (mouse, event) {
             console.log('456', this.mouseman.scalingOn, this.register.state.status)
-            if (!this.mouseman.scalingOn || this.register.state.status !== SPECTACLE_STATUS.PLAYING) return;
+            if (!this.mouseman.scalingOn || this.register.state.status !== STATUSES.PLAYING) return;
 
             if (event.deltaY > 0) {
                 this.camera.zoomOut();

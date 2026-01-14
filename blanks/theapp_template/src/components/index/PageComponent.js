@@ -1,6 +1,6 @@
-import {IState} from "../../../engine/IState.js";
-import {ReaComponent} from "../../../engine/ReaComponent.js";
-import {LayerManager} from "../../../engine/LayerManager.js";
+import {IState} from "engine/IState.js";
+import {ReaComponent} from "engine/ReaComponent.js";
+import {LayerManager} from "engine/LayerManager.js";
 import {BasicSandboxComponent} from "./BasicSandboxComponent.js";
 
 

@@ -63,6 +63,7 @@ window.GLog = (...args) => {
 window.GLogLevel = window.GLogLevel ?? 3;
 
 
+
 export const STATUSES = {
     VOID: 'void',
     ERROR: 'error',
@@ -91,7 +92,7 @@ main#root[data-id=root]:
 
 export class Register {
 
-    static version = '0.0.0.3'
+    static version = '0.0.0.4'
     static instance;
 
     /**
@@ -158,7 +159,6 @@ export class Register {
 
         this.assetsLoader = new AssetLoader(this)
         this.inputControlManager = new InputControlManager(this)
-        /**@deprecated */        this.controlManager = this.inputControlManager
         this.uiManager = new UIManager(this)
         this.moduleManager = new ModuleManager(this)
         this.controllerManager = new ControllerManager(this)
@@ -185,20 +185,14 @@ export class Register {
     /** @type {InputControlManager}*/        get inputs () {return this.inputControlManager}
     /** @type {AssetLoader}*/                get assets () {return this.assetsLoader}
 
-    /**@deprecated */                                       get controls () {return this.controlManager}
-    /**@deprecated @type {ModuleManager}*/                  get modman() {return this.moduleManager}
-    /**@deprecated @type {ComponentManager}*/               get compoman() {return this.componentManager}
-    /**@deprecated @type {ControllerManager}*/              get controman() {return this.controllerManager}
-    /**@deprecated @type {UIManager}*/                      get uiman() {return this.uiManager}
-    /**@deprecated @type {ScreenManager}*/                  get screenman() {return this.screenManager}
-    /**@deprecated @type {PluginManager}*/                  get plugman() {return this.pluginManager}
-    /**@deprecated @returns {ReactiveTemplateYAML|*} */     get templateman () {return this.reactiveTemplate}
-
     async setup( params ) {
 
         if (params && Object.keys(params).length > 0) {
             this.config = {...this.config, ...params}
         }
+
+
+
 
         if (this.config?.preload && Array.isArray(this.config.preload)) {
             this.assets.configured({preload: this.config.preload, soundManager: new SoundManager()})

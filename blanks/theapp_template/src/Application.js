@@ -58,7 +58,7 @@ export class Application extends Register{
 
         // Add root for UI parts
         this.uiManager.configured({
-            parent: this.templateman.elements.ui,
+            parent: this.rootUIElement,
         });
 
 

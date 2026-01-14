@@ -11,7 +11,7 @@ window.GLogLevel = 6; // window.GLevelAppLow;
 
 const app = new Application();
 
-app.registerControllers({
+await app.registerControllers({
     IndexController: new IndexController(app),
 })
 

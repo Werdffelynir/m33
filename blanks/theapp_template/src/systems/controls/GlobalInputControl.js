@@ -1,4 +1,4 @@
-import {InputControl} from "../../../engine/InputControl.js";
+import {InputControl} from "engine/InputControl.js";
 import {Keybro} from "../Keybro.js";
 
 
@@ -12,7 +12,7 @@ export class GlobalInputControl extends InputControl {
         const register = this.manager.register
         console.log(`{GlobalInputControl} Run once, when manager exec setup()`)
         console.log( this.manager)
-       // this.manager.keyboardManager.keymap = Keybro
+        register.inputs.keyboardManager.keymap = Keybro
 
         /*
         // Set new target

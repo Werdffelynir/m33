@@ -1,15 +1,13 @@
-import {ReaComponent} from "../../engine/ReaComponent.js";
-import {Doom} from "../../engine/utils/Doom.js";
+import {ReaComponent} from "engine/ReaComponent.js";
+import {Doom} from "engine/utils/Doom.js";
 import {IndexController} from "../controllers/IndexController.js";
 import {ExampleController} from "../controllers/ExampleController.js";
-// import {Theater3DController} from "../controllers/Theater3DController.js";
-// import {TheaterController} from "../controllers/TheaterController.js";
 
 
 
 const CSS = `
 
-@import url('../../assets/cssme/transform.css') layer(transform);
+@import url('assets/cssme/transform.css') layer(transform);
 
 @layer esc-menu-component {
 
@@ -123,30 +121,6 @@ export class EscMenuComponent extends ReaComponent {
                 title: 'Theater3D (2.5D)',
                 onclick: async (payload) =>  await switchController(IndexController.name)
             },
-/*            {
-                title: 'Rooms',
-                onclick: async (payload) =>  await switchController(ExampleController.name)
-            },
-            {
-                title: 'UIIs',
-                onclick: async (payload) =>  await switchController(ExampleController.name)
-            },
-            {
-                title: 'Dialogs',
-                onclick: async (payload) =>  await switchController(ExampleController.name)
-            },
-            {
-                title: 'Shapes',
-                onclick: async (payload) =>  await switchController(ExampleController.name)
-            },
-            {
-                title: 'Sprites',
-                onclick: async (payload) =>  await switchController(ExampleController.name)
-            },
-            {
-                title: 'Backgrounds',
-                onclick: async (payload) =>  await switchController(ExampleController.name)
-            },*/
         ];
 
         this.menulist.forEach((it, i) => {

@@ -1,6 +1,6 @@
-import {ReaComponent} from "../../engine/ReaComponent.js";
-import {Doom} from "../../engine/utils/Doom.js";
-import {EventBus} from "../../engine/EventBus.js";
+import {ReaComponent} from "engine/ReaComponent.js";
+import {Doom} from "engine/utils/Doom.js";
+import {EventBus} from "engine/EventBus.js";
 
 
 

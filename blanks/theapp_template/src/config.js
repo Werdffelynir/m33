@@ -11,9 +11,9 @@ export const config = {
         'VersionInfoPlugin.js',
     ],
     preload: [
-        {type: 'image', name: 'picture', url: '/assets/images/picture.png'},
-        {type: 'audio', name: 'click1', url: './assets/sounds/click5.mp3'},
-        {type: 'json', name: 'demodata', url: '/assets/data/demodata.json'},
+        // {type: 'image', name: 'picture', url: '/assets/images/picture.png'},
+        // {type: 'audio', name: 'click1', url: './assets/sounds/click5.mp3'},
+        // {type: 'json', name: 'demodata', url: '/assets/data/demodata.json'},
     ],
 };
 
