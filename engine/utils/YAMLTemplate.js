@@ -2,7 +2,35 @@ import {Ut} from "../Ut.js";
 import {Dot} from "./Dot.js";
 import {Doom} from "./Doom.js";
 
+
 /**
+ * Some view template examples
+ * [value=@stateParam]
+ * [onclick=@stateHandler]
+ * [onchange=@stateHandler]
+ * [oninput=@stateHandler]
+ *
+ * [data-id=elementName]
+ *
+ * input[type=text][value=@projectName][onchange=@onchange][data-name=projectName][autocomplete=off][spellcheck=false]
+ *
+ * input.w200px[type=range][value=@positionX][step=16][min=-1024][max=1024][oninput=@oninput][data-name=positionX]
+ *
+ * select[data-id=repeat][data-name=repeat][onchange=@onchangeSelect]
+ *   option[data-name=no-repeat][selected=selected]: "no-repeat"
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ **/
+
+ /**
+ *
+ * 
  * ```
  * div#popup:
  *   div.header:

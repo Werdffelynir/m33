@@ -9,7 +9,7 @@ import {ReactiveTemplate} from "../../../engine/ReactiveTemplate.js";
 
 
 const CSS_FONTS = `
-@import url("/assets/cssme/animate.css") layer(animate);
+@import url("/assets/cssme/animated.css") layer(animated);
 @import url("/assets/cssme/transform.css") layer(transform);
 
 @layer page {

@@ -7,16 +7,37 @@ const CSS = `
 @layer page {
 
     @scope(#SettingsComponent) {
-    
+        
     }
-}    
+
+}
 `;
+
 const HTML = `
 div.menucontent-format 
   div
     h1: "SETTINGS"
   div.w-100.h-90
-    div: "___settings_params___"
+
+    div.fx-start-center
+      div.w-200px
+        input[type=checkbox][name=pixelizate][checked=true]
+      div.pad-l-10px: "Pixelizate (scale down)"
+
+    div.marg-t-10px.fx-start-center
+      div.w-200px
+        input[type=checkbox][name=retro][checked=true]
+      div.pad-l-10px: "Retro VCS (noise & fx)"
+
+    div.marg-t-10px.fx-start-center
+      div.w-200px
+        select[name=resolution]
+          option[value=800x600]: "800x600"
+          option[value=1024x786]: "1024x786"
+          option[value=1920x1080][selected=true]: "1920x1080"
+      div.pad-l-10px: "Resolution"
+
+
   div.text-right
     div.button[onclick=@onSave]: "Save"
 `;
