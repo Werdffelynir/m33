@@ -35,6 +35,11 @@ export class ControllerManager extends IManager {
     get currentName() {
         return this._activeName;
     }
+
+    /**
+     *
+     * @return {null|Controller}
+     */
     get current() {
         return this.get(this._activeName) || null;
     }
@@ -74,6 +79,7 @@ export class ControllerManager extends IManager {
             return console.warn(`{${this.constructor.name}.switch} "${name}" is equal to current controller. Switch request braked!`);
         }
 
+
         const inst = this.get(name)
 
         if (this._activeName) {
@@ -82,6 +88,7 @@ export class ControllerManager extends IManager {
 
             instPrev.destroy();
         }
+
 
         if (!this._installed.has(name)) {
 

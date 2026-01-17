@@ -245,7 +245,7 @@ export class Register {
     }
 
     async switchController(name, params = {}) {
-        if (this._lastController === name) return  console.warn(`{${this.constructor.name}.switchController} 
+        if (this._lastController === name) return console.warn(`{${this.constructor.name}.switchController} 
         Multiple call. process was interrupted!`, name);
         this._lastController = name;
 
@@ -311,18 +311,6 @@ export class Register {
 
             this.uiManager.registerView(name, instance);
             this.eventBus.publish(`register:view:${name}:`, {name:name, data: instance})
-        }
-    }
-
-    /**
-     * @deprecated
-     */
-    registerUIView(name, template) {
-        if (!this.uiManager.has(name)) {
-            this.uiManager.registerView(name, template);
-            this.eventBus.publish(`register:view:${name}:`, {name:name, data: template})
-        } else {
-            console.warn(`View "${name}" is registered!`)
         }
     }
 
