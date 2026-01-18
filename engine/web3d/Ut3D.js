@@ -29,6 +29,37 @@ export async function loadTexture(url, reduce, repeated = 1) {
 }
 
 
+/**
+ * ```
+ * loadScene(url, (scene) => {
+ *     scene.traverse( (obj3d) => {
+ *          obj3d
+ *     } )
+ * }).then()
+ *
+ * ```
+ * @param url
+ * @param callback
+ * @return {Promise<Object3D>}
+ */
+export async function loadScene(url, callback) {
+    const loader = new THREE.ObjectLoader();
+
+    try {
+        const response = await fetch(url);
+        const jsonObj = await response.json();
+
+        const scene = await loader.parseAsync(jsonObj.scene)
+
+        callback?.(scene)
+
+        return scene
+
+    } catch (error) {
+        console.error('Error loading scene:', error);
+    }
+}
+
 
 
 export async function loadSceneModel(url, reduce) {

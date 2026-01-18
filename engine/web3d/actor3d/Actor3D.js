@@ -3,11 +3,11 @@ import * as THREE from "three";
 
 
 export class Actor3D  {
-    constructor(actor3d) {
+    constructor(mesh) {
         /**
          * @type {THREE.Mesh}
          */
-        this.actor3d = actor3d;
+        this.mesh = mesh;
         this.active = true;
     }
 
