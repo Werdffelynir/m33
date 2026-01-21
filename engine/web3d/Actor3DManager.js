@@ -6,10 +6,6 @@ export class Actor3DManager {
         this.nextId = 1;
     }
 
-    /**
-     * Створює та реєструє Actor3D.
-     * Якщо actor3d.id вже є → перезапис не робимо.
-     */
     add(actor3d) {
         if (!actor3d || !actor3d.isActor3D) throw new Error("Actor3DManager.add: actor3d is null");
 
@@ -18,7 +14,6 @@ export class Actor3DManager {
 
         this.entities.set(id, actor3d);
 
-        // викликаємо start() для всіх компонентів
         for (const c of actor3d.components) {
             if (typeof c.start === "function") c.start();
         }

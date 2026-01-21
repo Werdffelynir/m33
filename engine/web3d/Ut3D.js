@@ -31,6 +31,7 @@ export async function loadTexture(url, reduce, repeated = 1) {
 
 /**
  * ```
+ * await loadScene or promiseAll
  * loadScene(url, (scene) => {
  *     scene.traverse( (obj3d) => {
  *          obj3d
