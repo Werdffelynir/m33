@@ -602,8 +602,8 @@ export const Doom = {
     /**
      *
      * ```
-     * Doom.drawImageDiv(
-     *   'spritesheet.png', // image
+     * Doom.backgroundSprite(
+     *   'spritesheet.png',   // image
      *    64, 0,              // sx, sy: обрізати з (64, 0)
      *    32, 32,             // sWidth, sHeight: кадр розміром 32x32
      *    100, 200,           // dx, dy: куди вставити
@@ -622,7 +622,7 @@ export const Doom = {
      * @param parent
      * @returns {HTMLDivElement}
      */
-    drawImageDiv(imageSrc, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight, parent = document.body) {
+    backgroundSprite(imageSrc, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight, parent = document.body) {
 
         const div = document.createElement('div');
 
@@ -885,7 +885,7 @@ export const Doom = {
             repository.svg[key] = await Doom.load.svg(_svg[key]);
         }
         for (let key in _json) {
-            repository.json[key] = await Doom.load.svg(_json[key]);
+            repository.json[key] = await Doom.load.json(_json[key]);
         }
 
         return repository;
@@ -970,6 +970,7 @@ Doom.load.svg = async function (src, width = 100, height = 100, callback) {
     }
     return svg;
 };
+
 /**
  * Silence save file to User Download folder
  * ```

@@ -1,21 +1,35 @@
 import * as THREE from 'three';
 import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
 import {FBXLoader} from "three/addons/loaders/FBXLoader.js";
+import {OBJLoader} from "three/addons/loaders/OBJLoader.js";
+import {MTLLoader} from "three/addons/loaders/MTLLoader.js";
 import {TransformControls} from "three/addons/controls/TransformControls.js";
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
 import {Ut} from "../Ut.js";
 import {Register} from "../Register.js";
+import {HDRLoader} from "three/addons/loaders/HDRLoader.js";
+
+
+
+
+const objectLoader = new THREE.ObjectLoader();
+const textureLoader = new THREE.TextureLoader()
+const audioLoader = new THREE.AudioLoader();
+const gltfLoader = new GLTFLoader()
+const objLoader = new OBJLoader()
+const mtlLoader = new MTLLoader();
+const fbxLoader = new FBXLoader();
+const hdrLoader = new HDRLoader()
 
 
 /**
  * ```
- * loadTexture( '/resources/images/background/grasslight-big.jpg' )
- * loadTexture( '/resources/images/background/grasslight-big.jpg', () => {} )
+ * texture = await loadTexture( '/resources/images/background/grasslight-big.jpg' )
+ * loadTexture( '/resources/images/background/grasslight-big.jpg', (texture) => {} )
  * ````
  **/
-export async function loadTexture(url, reduce, repeated = 1) {
-    const textureLoader = new THREE.TextureLoader()
+export async function loadTexture(url, callback, repeated = 1) {
     /**@type {THREE.Texture} */
     const texture = await textureLoader.loadAsync(url)
     texture.wrapS = THREE.RepeatWrapping
@@ -23,7 +37,7 @@ export async function loadTexture(url, reduce, repeated = 1) {
 
     texture.repeat.set(repeated, repeated);
 
-    reduce?.(texture)
+    callback?.(texture)
 
     return texture
 }
@@ -44,13 +58,12 @@ export async function loadTexture(url, reduce, repeated = 1) {
  * @return {Promise<Object3D>}
  */
 export async function loadScene(url, callback) {
-    const loader = new THREE.ObjectLoader();
 
     try {
         const response = await fetch(url);
         const jsonObj = await response.json();
 
-        const scene = await loader.parseAsync(jsonObj.scene)
+        const scene = await objectLoader.parseAsync(jsonObj.scene)
 
         callback?.(scene)
 
@@ -62,26 +75,113 @@ export async function loadScene(url, callback) {
 }
 
 
-
-export async function loadSceneModel(url, reduce) {
-    const loader = new GLTFLoader()
-    const gltf = await loader.loadAsync( url )
+export async function loadGLTF(url, callback) {
+    const gltf = await gltfLoader.loadAsync( url )
 
     /**@type {Scene} */
     const scene = gltf.scene;
     scene.scale.setScalar( 1 );
     scene.position.set( 0, 0, 0 );
 
-    if (reduce) scene.traverse(reduce)
+    if (callback) scene.traverse(callback)
 
     return scene
 }
 
 
+export async function loadFBX(url, callback) {
+
+    const object = await fbxLoader.loadAsync(url)
+
+    if (callback) callback(object)
+    else
+        object.traverse((obj) => {
+
+            if (obj.isMesh) {
+
+                if (Array.isArray(obj.material)) {
+                    obj.material.forEach(m => {
+                        m.emissiveIntensity = 0
+                        m.metalness = 0
+                        m.shininess = 0
+                        m.opacity = 1
+                        m.needsUpdate = true;
+                    })
+                } else {
+                    obj.material.emissiveIntensity = 0
+                    obj.material.metalness = 0
+                    obj.material.shininess = 0
+                    obj.material.opacity = 1
+                    obj.material.needsUpdate = true;
+                }
+
+            }
+        })
+
+    return object
+}
+
+
+export async function loadOBJ(url, urlMLT, callback) {
+
+    let materials;
+
+    if (urlMLT) {
+        const materials = await mtlLoader.loadAsync( urlMLT )
+        materials.preload();
+    }
+
+    if (materials) 
+        objLoader.setMaterials( materials );
+
+    return await objLoader.loadAsync( url );
+}
+
+
+export async function loadAudio(url, callback) {
+    const listener = new THREE.AudioListener();
+    const sound = new THREE.Audio( listener );
+
+    const fftSize = 128;
+
+    await audioLoader.loadAsync(url, function( buffer ) {
+        // sound.setBuffer( buffer );
+        // sound.setLoop( true );
+        // sound.setVolume( 0.5 );
+        // sound.play();
+    });
+
+    // const songElement = document.getElementById( 'song' );
+    // sound1.setMediaElementSource( songElement );
+    // sound1.setRefDistance( 20 );
+    // songElement.play();
+
+    callback?.(sound)
+
+    return sound
+}
+
+
+/**
+ * ```
+ * loadHDR('/resources/hdr/skybox_night_4_2k.hdr', (texture) => {
+ *     texture.mapping = THREE.EquirectangularReflectionMapping;
+ *     this.theater.scene.background = texture;
+ *     this.theater.scene.environment = texture;
+ *     this.theater.scene.backgroundBlurriness = 0;
+ *     this.theater.scene.fog = new THREE.FogExp2(0x020205, 0.04);
+ *     this.theater.scene.add(new THREE.AmbientLight(0x080810, 0.2));
+ * });
+ * ```
+ * */
+export async function loadHDR(url, callback) {
+    return await hdrLoader.loadAsync( url, callback )
+}
 
 
 
-export const drawCanvasTexture = ({draw, width, height}) => {
+
+export const canvasTexture = ({drawCallback, width, height}) => {
     const canvas = document.createElement('canvas');
     canvas.width = width ?? 512;
     canvas.height = height ?? 512;
@@ -89,9 +189,9 @@ export const drawCanvasTexture = ({draw, width, height}) => {
     const ctx = canvas.getContext('2d');
     ctx.textAlign = "left"
     ctx.textBaseline = "middle"
-    ctx.font = 'Bold 62px sans, sans-serif, Arial';
+    ctx.font = 'Bold 62px Play, Arial, sans, sans-serif';
 
-    draw?.(ctx)
+    drawCallback?.(ctx)
 
     const texture = new THREE.CanvasTexture(canvas);
 

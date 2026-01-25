@@ -123,4 +123,16 @@ export class AssetLoader extends IManager {
     get(name) {
         return this.cache[name];
     }
+
+
+
+    set(name, cached) {
+        this.cache[name] = cached;
+    }
+    add(name, cached) {
+        this.set(name, cached)
+    }
+    has(name) {
+        return this.cache[name] !== undefined
+    }
 }

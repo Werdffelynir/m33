@@ -150,7 +150,7 @@ export class Register {
         //
         //
         this.reactiveTemplate = new ReactiveTemplate({
-            template: RootTemplateString,
+            template: this.config?.template ?? RootTemplateString,
             state,
             props: {
                 register: this,
@@ -172,6 +172,7 @@ export class Register {
 
     get rootScreenElement () {return this.reactiveTemplate.elements.screen}
     get rootUIElement () {return this.reactiveTemplate.elements.ui}
+    get root () {return this.reactiveTemplate.template }
 
     /** @type {any} */                       get elements () {return this.reactiveTemplate.elements}
     /** @type {Reactive|*}*/                 get reactive () {return this.reactiveTemplate.reactive}
