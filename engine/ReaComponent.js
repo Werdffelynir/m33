@@ -99,10 +99,13 @@ export class ReaComponent {
         });
     }
 
-    create({template, css, state}) {
+    create({template, css, state, parent}) {
+
+        if (parent) 
+            this.parent = parent;
 
         this.reactiveTemplate = new ReactiveTemplate({
-            template: template || `div`,
+            template: template,
             state: state,
         });
 
@@ -153,9 +156,6 @@ export class ReaComponent {
     mount(parent) {
         if (this._attached) return;
 
-        // const template = this.renderTemplate();
-        // if (template) this.root.replaceChildren(template);
-
         if (parent) this.parent = parent;
 
         if (this.parent && this.root) {
@@ -165,6 +165,8 @@ export class ReaComponent {
             this.parent.appendChild(this.root);
             this._attached = true;
             this._installed = false;
+        } else {
+            console.error(`Can't mount Component "${this.constructor.name}". [parent] or [root] not determined`)
         }
     }
 

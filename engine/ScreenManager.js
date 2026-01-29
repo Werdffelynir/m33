@@ -32,7 +32,7 @@ export class ScreenManager extends IManager {
         if (!(instance instanceof Screen))
             throw new Error(`{${this.constructor.name}.add} "${name}" value is not type {Screen}`);
 
-        this.stackmanager.set(name, instance);
+        this.archive.set(name, instance);
 
         this.register.eventBus.publish(`screen:registered:${name}`, {name, data: instance});
 

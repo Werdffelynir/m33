@@ -404,14 +404,16 @@ export class Graphic {
      * ```
      * @returns {Graphic}
      */
-    text(text, x, y, styles = null, asStroke = false) {
-        if (styles && typeof styles === 'object') {
-            this.mixContextParams(styles);
+    text(text, x, y, params = null, asStroke = false) {
+        if (params && typeof params === 'object') {
+            this.mixContextParams(params);
         }
 
         if (asStroke) {
+            if (typeof params === 'string') this.ctx.strokeStyle = params
             this.ctx.strokeText(text, x, y);
         } else {
+            if (typeof params === 'string') this.ctx.fillStyle = params
             this.ctx.fillText(text, x, y);
         }
 
@@ -679,7 +681,7 @@ const GraphicContextState = {
     // opacity() <percentage> 100%
     // saturate() <percentage> 100%
     // sepia() <percentage> 100%
-    font: "14px sans-serif",                //  bold 48px serif, 12px/14px bold sans-serif
+    font: "14px Play, Arial, sans, sans-serif ",                //  bold 48px serif, 12px/14px bold sans-serif, Bold 62px Play, Arial, sans, sans-serif
     fontKerning: "auto",
     fontStretch: "normal",                  // normal (default), ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded.
     fontVariantCaps: "normal",              // small-caps all-small-caps petite-caps all-petite-caps unicase titling-caps
@@ -764,17 +766,29 @@ const GraphicContext2DPrototype = {
     clearRect: 'function',
     clip: 'function',
     closePath: 'function',
-    createConicGradient: 'function',
-    createImageData: 'function',
-    createLinearGradient: 'function',
-    createPattern: 'function',
-    createRadialGradient: 'function',
     drawFocusIfNeeded: 'function',
     drawImage: 'function',
     ellipse: 'function',
     fill: 'function',
     fillRect: 'function',
     fillText: 'function',
+    createConicGradient: 'function',
+    createImageData: 'function',
+    createLinearGradient: 'function',
+                const gradient = ctx.createLinearGradient(0, 0, ctx.canvas.width, ctx.canvas.height);
+                gradient.addColorStop(0, '#d3cce7');
+                gradient.addColorStop(0.6, 'rgb(103, 107, 170)');
+                gradient.addColorStop(1, '#1e301e');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    createPattern: 'function',
+    createRadialGradient: 'function',
+                const grad = ctx.createRadialGradient(150, 75, 10, 150, 75, 100);
+                grad.addColorStop(0, 'yellow');
+                grad.addColorStop(1, 'blue');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 300, 150);
+
 // . . . . . . . . . . . . . . . . . . . . . . (text, x, y) (text, x, y, maxWidth)
     getContextAttributes: 'function',
     getImageData: 'function',

@@ -37,8 +37,10 @@ export class LayerManager extends IManager {
      * ```
      * {
      *      canvases: ['game', 'ui', 'bg'],
-     *      config: { width: 0, height: 0, quality: true },
      *      parent: HTMLElement,
+     *      width: 0, 
+     *      height: 0, 
+     *      quality: true,
      * }
      * ```
      * @param props {*}
@@ -89,7 +91,7 @@ export class LayerManager extends IManager {
             return console.warn(`{LayerManager.attach} parent element not set, or ont type of Node, attachment is prohibited`)
         }
 
-        this.stackmanager.forEach( (layer) => {
+        this.archive.forEach( (layer) => {
             layer.attachTo(this.parent);
         });
 
@@ -99,7 +101,7 @@ export class LayerManager extends IManager {
     detach(parent) {
         if (parent && parent.nodeType === Node.ELEMENT_NODE) this.parent = parent
 
-        this.stackmanager.forEach( (layer) => {
+        this.archive.forEach( (layer) => {
             // layer.canvas.parentElement.removeChild(layer.canvas);
             // parent.removeChild(layer.canvas);
             layer.detach(this.parent);
@@ -113,39 +115,40 @@ export class LayerManager extends IManager {
      */
     set(name, layer) {
         this.frontCanvas = layer.canvas;
-        this.stackmanager.set(name, layer);
+        this.archive.set(name, layer);
     }
 
     /** @returns {Layer} */
     get(name) {
-        return this.stackmanager.get(name);
+        return this.archive.get(name);
     }
 
     has(name) {
-        return this.stackmanager.has(name);
+        return this.archive.has(name);
     }
 
     each(callback) {
         if (Ut.isFunction(callback)) {
-            this.stackmanager.forEach(callback)
+            this.archive.forEach(callback)
             return;
         }
-        return Object.fromEntries(this.stackmanager);
+        return Object.fromEntries(this.archive);
     }
 
     /** @returns {Map<string, Layer>} */
     get layers () {
-        return this.getStack()
+        return this.getArchive()
     }
 
     clear(name) {
-        this.stackmanager.get(name).ctx.clearRect(0, 0, this.stackmanager.get(name).canvas.width, this.stackmanager.get(name).canvas.height);
+        this.archive.get(name).ctx.clearRect(0, 0, this.archive.get(name).canvas.width, this.archive.get(name).canvas.height);
     }
 
     clearAll() {
-        for (const {name, layer} of this.stackmanager) {
+        for (const {name, layer} of this.archive) {
             layer.ctx.clearRect(0, 0, layer.canvas.width, layer.canvas.height);
         }
     }
+
 }
 

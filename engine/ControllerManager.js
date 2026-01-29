@@ -18,7 +18,7 @@ export class ControllerManager extends IManager {
     /**
      * @property {Register} register
      *
-     * @property {Map<string, Controller>}  stackmanager
+     * @property {Map<string, Controller>}  archive
      * @property {Controller} current
      * @property {HTMLElement} root
      **/
@@ -55,7 +55,7 @@ export class ControllerManager extends IManager {
         //
         //
         //
-        this.stackmanager.set(name, instance);
+        this.archive.set(name, instance);
 
         //
         //

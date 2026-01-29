@@ -33,7 +33,7 @@ export class ModuleManager extends IManager {
          *
          * @type {Map<string, Module>}
          */
-        this.stackmanager = new Map();
+        this.archive = new Map();
         this._modulesInstalled = new Set();
     }
 
@@ -43,7 +43,7 @@ export class ModuleManager extends IManager {
     remove(name) {
         let module = this.get(name);
         module?.destroy?.();
-        this.stackmanager.delete(name);
+        this.archive.delete(name);
         this._modulesInstalled.delete(name);
 
         this.register.eventBus.publish(`module:deleted:${name}`, {name, data: {}});
@@ -58,7 +58,7 @@ export class ModuleManager extends IManager {
 
         module?.setup();
 
-        return this.stackmanager.set(name, module);
+        return this.archive.set(name, module);
     }
 
     isInstalled(name) {
@@ -92,7 +92,7 @@ export class ModuleManager extends IManager {
     }
 
     tick(delta, iterator, paused) {
-        for (const module of this.stackmanager.values()) {
+        for (const module of this.archive.values()) {
             if (module?.tick) {
                 module.tick(delta, iterator, paused);
             }
@@ -100,7 +100,7 @@ export class ModuleManager extends IManager {
     }
 
     update(delta, camera, iterator) {
-        for (const module of this.stackmanager.values()) {
+        for (const module of this.archive.values()) {
             if (module.updatable) {
                 module.update(delta, camera, iterator);
             }
@@ -108,7 +108,7 @@ export class ModuleManager extends IManager {
     }
 
     reload() {
-        for (const module of this.stackmanager.values()) {
+        for (const module of this.archive.values()) {
             module.reload();
         }
     }

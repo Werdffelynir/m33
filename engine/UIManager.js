@@ -57,14 +57,14 @@ export class UIManager extends IManager {
      * @returns {HTMLElement|void}
      */
     set(key, template) {
-        if (this.stackmanager.has(key))
-            return this.stackmanager.get(key);
+        if (this.archive.has(key))
+            return this.archive.get(key);
 
         if (!Ut.isNode(template)) {
             return console.warn(`{UIManager.registerView} template required type of HTMLElement`);
         }
 
-        this.stackmanager.set(key, template);
+        this.archive.set(key, template);
 
         //
         // bused
@@ -91,10 +91,10 @@ export class UIManager extends IManager {
      * @param callback
      */
     uiclick(key, elemKey, callback) {
-        if (!this.stackmanager.has(key)) return;
+        if (!this.archive.has(key)) return;
 
         this.subscriber = ({event, target, data}) => {
-            const template = this.stackmanager.get(key);
+            const template = this.archive.get(key);
 
             if (template.contains(target)) {
                 callback(event, target, data)
@@ -106,7 +106,7 @@ export class UIManager extends IManager {
 
     delete(key) {
         this.hide(key);
-        this.stackmanager.delete(key);
+        this.archive.delete(key);
         this.eventBus.publish(`ui:deleted:${key}`, {name: key, data: null});
 
         this._subscribes.forEach(ek => this.eventBus.unsubscribe(`ui:click:${ek}`, this.subscriber))
@@ -114,8 +114,8 @@ export class UIManager extends IManager {
     }
 
     clear() {
-        this.stackmanager.forEach((key, view) => this.hide(key));
-        this.stackmanager.clear();
+        this.archive.forEach((key, view) => this.hide(key));
+        this.archive.clear();
         this.eventBus.publish(`ui:cleared`, {});
     }
 
@@ -143,7 +143,7 @@ export class UIManager extends IManager {
     }
 
     show(key, point) {
-        const view = this.stackmanager.get(key);
+        const view = this.archive.get(key);
 
         if (view && !this.root.contains(view)) {
 
@@ -168,8 +168,8 @@ export class UIManager extends IManager {
 
         if (!view) {
 
-            console.warn(`"${key}" views is not registered! \nList of exists (${this.stackmanager.size})\n` +
-                [...this.stackmanager.keys()].join(', \n')
+            console.warn(`"${key}" views is not registered! \nList of exists (${this.archive.size})\n` +
+                [...this.archive.keys()].join(', \n')
             );
         }
     }
@@ -180,7 +180,7 @@ export class UIManager extends IManager {
     
     hide(key) {
         if (!key) {
-            this.stackmanager.forEach((react, key) => {
+            this.archive.forEach((react, key) => {
                 this.hide(key);
             })
             return;
@@ -188,7 +188,7 @@ export class UIManager extends IManager {
 
         if (Ut.isString(key)) {
 
-            const view = this.stackmanager.get(key);
+            const view = this.archive.get(key);
 
             if (view && this.root.contains(view)) {
 
@@ -214,8 +214,8 @@ export class UIManager extends IManager {
     
     async loadTemplate(key, url, state = {}) {
 
-        if (this.stackmanager.get(key))
-            return this.stackmanager.get(key);
+        if (this.archive.get(key))
+            return this.archive.get(key);
 
         const templateString = await this.assetLoader.loadText(key, this.viewsPath + url)
         this.eventBus?.publish(`ui:loaded:${key}`, {name: key, data: null});
@@ -227,7 +227,7 @@ export class UIManager extends IManager {
     }
 
     setPosition(key, x, y) {
-        const template = this.stackmanager.get(key);
+        const template = this.archive.get(key);
 
         Doom.css(template, {
             display: 'block',
@@ -242,7 +242,7 @@ export class UIManager extends IManager {
     }
 
     setPositionRight(key, right = 0, top = 0) {
-        const template = this.stackmanager.get(key);
+        const template = this.archive.get(key);
 
         Doom.css(template, {
             display: 'block',
@@ -258,7 +258,7 @@ export class UIManager extends IManager {
     }
 
     setPositionBottom(key) {
-        const template = this.stackmanager.get(key);
+        const template = this.archive.get(key);
         Doom.css(template, {
             display: 'block',
             position: 'absolute',
@@ -274,7 +274,7 @@ export class UIManager extends IManager {
     }
 
     setPositionRightBottom(key) {
-        const template = this.stackmanager.get(key);
+        const template = this.archive.get(key);
         Doom.css(template, {
             display: 'block',
             position: 'absolute',
@@ -290,8 +290,8 @@ export class UIManager extends IManager {
     }
 
     setPositionCenter(key) {
-        const template = this.stackmanager.get(key);
-        const position = Doom.position(this.stackmanager.get(key));
+        const template = this.archive.get(key);
+        const position = Doom.position(this.archive.get(key));
 
         if (!template) {
             throw new Error(` setPositionCenter for element: ${template ? '[ELEMENT]' : '[UNDEFINED]'}`);
@@ -313,7 +313,7 @@ export class UIManager extends IManager {
     _dragconf = {isDragging: false, mouse: {x: 0, y: 0}, z: 0};
 
     setDraggable(name, holder = null) {
-        const template = this.stackmanager.get(name);
+        const template = this.archive.get(name);
         holder = holder && holder.nodeType === Node.ELEMENT_NODE ? holder : template;
 
         // Create events functions

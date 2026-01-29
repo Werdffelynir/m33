@@ -5,32 +5,31 @@ export class IManager extends ICommander {
     constructor(register) {
         super(register)
 
-        this.stackmanager = new Map();
+        this.archive = new Map();
     }
 
     get(key) {
-        return this.stackmanager.get(key)
+        return this.archive.get(key)
     }
 
     has(key) {
-        return this.stackmanager.has(key)
+        return this.archive.has(key)
     }
 
     set(key, value) {
-        if (this.stackmanager.has(key)) {
+        if (this.archive.has(key)) {
             console.warn(`Identical Keys Error. addStack parameter [${key}] is exist!`);
             return;
         }
 
-        return this.stackmanager.set(key, value);
+        return this.archive.set(key, value);
     }
 
     /**
-     *
-     * @param asObject
+     * @param asCopyObject
      * @returns {any|Map<any, any>}
      */
-    getStack(asObject = false) {
-        return asObject ? Object.fromEntries(this.stackmanager.entries()) : this.stackmanager;
+    getArchive(asCopyObject = false) {
+        return asCopyObject ? Object.fromEntries(this.archive.entries()) : this.archive;
     }
 }

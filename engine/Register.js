@@ -92,8 +92,9 @@ main#root[data-id=root]:
 
 export class Register {
 
-    static version = '0.0.0.4'
-    static instance;
+    static version = '0.0.0.5'
+
+    /** @type {Register}*/ static instance;
 
     /**
      * ```
@@ -115,6 +116,7 @@ export class Register {
      * config
      *
      * // Getters:
+     * rootElement: Element
      * rootScreenElement: Element
      * rootUIElement: Element
      * elements: { [dataset.id]: Element, ... }
@@ -172,7 +174,8 @@ export class Register {
 
     get rootScreenElement () {return this.reactiveTemplate.elements.screen}
     get rootUIElement () {return this.reactiveTemplate.elements.ui}
-    get root () {return this.reactiveTemplate.template }
+    get rootElement () {return this.reactiveTemplate.template }
+    /** @depricated */  get root () {return this.reactiveTemplate.template }
 
     /** @type {any} */                       get elements () {return this.reactiveTemplate.elements}
     /** @type {Reactive|*}*/                 get reactive () {return this.reactiveTemplate.reactive}
@@ -263,6 +266,9 @@ export class Register {
 
     registerScreens(classes = {}) {
         for (const [name, instance] of Object.entries(classes)) {
+
+            instance.name = name
+
             this.screenManager.add(name, instance);
 
             this.eventBus.publish(`register:screen:${name}:`, {name, data: instance})
@@ -285,6 +291,8 @@ export class Register {
                 return console.warn(`Module ${name} is registered!`);
             }
 
+            instance.name = name
+
             this.moduleManager.add(name, instance);
 
             this.eventBus.publish(`register:module:${name}:`, {name, data: instance})
@@ -297,8 +305,11 @@ export class Register {
             if (this.componentManager.has(name)) {
                 return console.warn(`Component ${name} is registered!`)
             }
-
+            
+            instance.name = name
+            
             this.componentManager.add(name, instance);
+
             this.eventBus.publish(`register:component:${name}:`, {name, data: instance})
         }
     }
@@ -309,9 +320,12 @@ export class Register {
             if (this.uiManager.has(name)) {
                 console.warn(`UI View "${name}" is registered!`)
             }
+            
+            instance.name = name
 
             this.uiManager.registerView(name, instance);
-            this.eventBus.publish(`register:view:${name}:`, {name:name, data: instance})
+
+            this.eventBus.publish(`register:view:${name}:`, {name, data: instance})
         }
     }
 

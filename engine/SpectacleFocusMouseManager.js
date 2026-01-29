@@ -4,6 +4,7 @@ import {STATUSES} from "./Register.js";
 
 
 /**
+ * @deprecated
  * ```
  * spectacle = mouseman.mousetargetSpectacle
  * mouseGlobal = mouseman.mouseGlobal

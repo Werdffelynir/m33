@@ -137,7 +137,7 @@ export async function loadOBJ(url, urlMLT, callback) {
     return await objLoader.loadAsync( url );
 }
 
-
+// todo me
 export async function loadAudio(url, callback) {
     const listener = new THREE.AudioListener();
     const sound = new THREE.Audio( listener );
@@ -180,37 +180,155 @@ export async function loadHDR(url, callback) {
 
 
 
-
-export const canvasTexture = ({drawCallback, width, height}) => {
+/**
+ * ```
+ * canvasTexture ( ctx => {
+ *      const gfx = new Graphic(ctx, {
+ *          font: "52px bold Play, sans, sans-serif",
+ *          textBaseline: "top"
+ *      });
+ *      
+ *      gfx.rect(0, 0, 256, 128, '#1a1b18')        
+ *      gfx.text("Hello", 20, 20, '#fa3cc2')
+ * }, 256, 128 )
+ * ```
+ * 
+ * @param {*} callback 
+ * @param {*} width 
+ * @param {*} height 
+ * @returns 
+ */
+export const canvasTexture = (callback, width, height) => {
     const canvas = document.createElement('canvas');
     canvas.width = width ?? 512;
     canvas.height = height ?? 512;
 
     const ctx = canvas.getContext('2d');
-    ctx.textAlign = "left"
+    ctx.textAlign = "center"
     ctx.textBaseline = "middle"
-    ctx.font = 'Bold 62px Play, Arial, sans, sans-serif';
+    ctx.font = 'Bold 32px Play, Arial, sans, sans-serif'
 
-    drawCallback?.(ctx)
+    callback?.(ctx)
 
     const texture = new THREE.CanvasTexture(canvas);
-
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
     texture.colorSpace = THREE.SRGBColorSpace;
+
     return texture
+}
+export const imageTexture = (img, callback, width, height) => {
+    img.width = width
+    img.height = height
+    const tex = new THREE.Texture(img);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.needsUpdate = true;
+
+    callback?.(texture)
+
+    return texture;
 }
 
 
 
-
+/**
+ * ```
+ * perlin = new PerlinNoise(seedNumber)
+ * perlin.noise(x, y)
+ *         this._seed = seed ?? math?.random?.() ?? Math.random()
+ * ```
+ */
 
 export class PerlinNoise {
-    _seed = 0
-    size = 1
-    scale = 1
 
-    constructor(seed) {
+    constructor(seed = 1, math) {
 
-        this._seed = seed ?? Math.random()
+
+        // simple deterministic RNG (LCG)
+        let s = seed >>> 0
+        this.random = math?.random ?? (() => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296)
+
+        this.seedGenerate()
+    }
+
+    seedGenerate() {
+        const p = new Uint8Array(256)
+        this.perm = new Uint8Array(512)
+
+        for (let i = 0; i < 256; i++) p[i] = i
+        
+        // Fisher–Yates shuffle
+        for (let i = 255; i > 0; i--) {
+            const j = (this.random() * (i + 1)) | 0
+            ;[p[i], p[j]] = [p[j], p[i]]
+        }
+
+        for (let i = 0; i < 512; i++) {
+            this.perm[i] = p[i & 255]
+        }
+    }
+
+    fade(t) {
+        return t * t * t * (t * (t * 6 - 15) + 10)
+    }
+
+    lerp(a, b, t) {
+        return a + t * (b - a)
+    }
+
+    grad(hash, x, y) {
+        switch (hash & 7) {
+            case 0: return  x + y
+            case 1: return -x + y
+            case 2: return  x - y
+            case 3: return -x - y
+            case 4: return  x
+            case 5: return -x
+            case 6: return  y
+            case 7: return -y
+        }
+    }
+
+    noise(x, y) {
+        const X = Math.floor(x) & 255
+        const Y = Math.floor(y) & 255
+
+        const xf = x - Math.floor(x)
+        const yf = y - Math.floor(y)
+
+        const u = this.fade(xf)
+        const v = this.fade(yf)
+
+        const p = this.perm
+
+        const aa = p[X +     p[Y]]
+        const ab = p[X +     p[Y + 1]]
+        const ba = p[X + 1 + p[Y]]
+        const bb = p[X + 1 + p[Y + 1]]
+
+        const x1 = this.lerp(
+            this.grad(aa, xf,     yf),
+            this.grad(ba, xf - 1, yf),
+            u
+        )
+
+        const x2 = this.lerp(
+            this.grad(ab, xf,     yf - 1),
+            this.grad(bb, xf - 1, yf - 1),
+            u
+        )
+
+        // [-1, 1]
+        return this.lerp(x1, x2, v)
+    }
+}
+
+
+/* export class PerlinNoise {
+
+    constructor(seed, math) {
+
+        this._seed = seed ?? math?.random?.() ?? Math.random()
 
         const p = Array.from({length: 256}, (_, i) => i)
 
@@ -235,12 +353,6 @@ export class PerlinNoise {
         }
     }
 
-    perlin(x, y) {
-        return this.noise(
-            x * this.scale,
-            y * this.scale
-        ) * this.size
-    }
 
     noise(x, y) {
         const X = Math.floor(x) & 255;
@@ -265,8 +377,14 @@ export class PerlinNoise {
             v
         );
     }
-}
+} */
 
+    // perlin(x, y) {
+    //     return this.noise(
+    //         x * this.scaleX,
+    //         y * this.scaleY
+    //     ) * this.size
+    // }
 
 /**
  * select object - mouse dblclick, or shiftKey + click

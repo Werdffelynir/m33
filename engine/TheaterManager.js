@@ -4,7 +4,9 @@ import {AnimationLoop} from "./AnimationLoop.js";
 import {STATUSES} from "./Register.js";
 
 
-
+/**
+ * @deprecated
+ */
 export class TheaterManager extends ICommander {
 
     /**

@@ -12,8 +12,11 @@ export
  */
 let perlin = {
         seed: 0,
-        setSeed: function (newSeed) {
-            this.seed = typeof newSeed === "string" ? perlin._getCodes(newSeed) : Number(newSeed);
+        setSeed: function (seed) {
+            this.seed = typeof seed === "string" 
+                ? perlin._getCodes(seed) 
+                : seed 
+                    ? seed : perlin.randomSeed()
             this.clear();
         },
         _getCodes: (str) => {

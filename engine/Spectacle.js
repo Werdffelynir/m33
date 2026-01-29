@@ -31,6 +31,8 @@ const SpectacleState = {
 
 
 /**
+ * @deprecated
+ * 
  * Events published in CockpitSpectaclesConfigure:
  *  `spectacle:focusin`
  *  `spectacle:focusin:${payload.name}`

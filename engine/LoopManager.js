@@ -68,18 +68,18 @@ export class LoopManager extends IManager {
 
     /** @returns {AnimationLoop|{animation:AnimationLoop}|*} */
     loop(key = 'main') {
-        return this.stackmanager.get(key);
+        return this.archive.get(key);
     }
     /** @returns {AnimationLoop|{animation:AnimationLoop}|*} */
     get(key = 'main') {
-        return this.stackmanager.get(key);
+        return this.archive.get(key);
     }
 
     reload() {}
 
     destroy() {
         this.stop();
-        this.stackmanager.clear();
+        this.archive.clear();
     }
 
     start(key) {
@@ -93,7 +93,7 @@ export class LoopManager extends IManager {
 
     stop(key) {
         if (!key) {
-            this.stackmanager.forEach((loop) => {
+            this.archive.forEach((loop) => {
                 loop.stop();
             })
             return;
@@ -135,7 +135,7 @@ export class LoopManager extends IManager {
         if (!(loop instanceof AnimationLoop))
             return console.warn(`"instance", must be a AnimationLoop `);
 
-        this.stackmanager.set(key, instance)
+        this.archive.set(key, instance)
 
         this.eventBus.publish(`loop:added:${key}`);
     }

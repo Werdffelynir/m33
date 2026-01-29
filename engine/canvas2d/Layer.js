@@ -78,10 +78,19 @@ export class Layer {
     }
 
     setGraphic(style = {}) {
-        this.gfx = new Graphic(this.ctx, Graphic.StyleEbby);
+        if (style instanceof Graphic) {
+        
+            this.gfx = style
+        
+        } else {
+        
+            this.gfx = new Graphic(this.ctx, Graphic.StyleEbby);
 
-        if (Ut.len(style))
-            this.gfx.mixContextParams(style)
+            if (Ut.len(style))
+                this.gfx.mixContextParams(style)
+        }
+
+        this.ctx = this.gfx.ctx
 
         return this.gfx ;
     }
