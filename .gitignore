@@ -22,9 +22,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-/examples/
-index.html
-reload.js
-watch.sh
-watcher.php
-serv.sh
+#/examples/
+#index.html
+#reload.js
+#watch.sh
+#watcher.php
+
