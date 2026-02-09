@@ -8,10 +8,11 @@ import {AssetLoader} from "./AssetLoader.js";
  *
  * Events:
  *  -
+ * `ui:configured`
+ * `ui:cleared`
  * `ui:registered:${key}`
  * `ui:click:${key}`
  * `ui:deleted:${key}`
- * `ui:cleared`
  * `ui:shown:${key}`
  * `ui:hidden:${key}`
  * `ui:loaded:${key}`
@@ -40,6 +41,8 @@ export class UIManager extends IManager {
         this._bused = new Set();
         this._visiblyViews = new Set();
         this._subscribes = new Set();
+
+        this.eventBus.publish(`ui:configured`, {});
     }
 
     set modal(value) {
@@ -145,6 +148,7 @@ export class UIManager extends IManager {
     show(key, point) {
         const view = this.archive.get(key);
 
+        // console.log(this.root)
         if (view && !this.root.contains(view)) {
 
             this.root.appendChild(view);
