@@ -105,9 +105,9 @@ export class EventBus {
      * ```
      * // handling 'click' event for all elements with attrs `data-id=ATTR_NAME`
      * eventBus.bused(element, 'click', 'id');
-     * eventBus.bused(element, 'click', 'var');
-     *
      * subscribe(`click:id:ATTR_NAME`, ( {event, target, data, name} ) => { })
+     * 
+     * eventBus.bused(element, 'click', 'var');
      * subscribe(`click:var:ATTR_NAME`, ( {event, target, data, name} ) => { })
      *
      * eventBus.bused(element, 'mousedown' 'id', 'uii');
