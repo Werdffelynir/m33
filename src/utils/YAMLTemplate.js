@@ -44,6 +44,7 @@ import {Doom} from "./Doom.js";
  *     div: "user popup text"
  * ```
  */
+
 export class YAMLTemplate {
 
     constructor({template, state = {}, researchAttrs, createNodeType, fnCreateNode} = {}) {
@@ -346,12 +347,6 @@ export class YAMLTemplate {
         return nodes;
     }
 
-}
-
-
-export function rea({template, state, props}) {
-    const yaml = new YAMLTemplate({template, state, props});
-    return yaml.render();
 }
 
 

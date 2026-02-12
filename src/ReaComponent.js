@@ -1,4 +1,27 @@
+import {YAMLTemplate} from "./utils/YAMLTemplate.js";
+import {Ut} from "./Ut.js";
 import {ReactiveTemplate} from "./ReactiveTemplate.js";
+
+
+
+/**
+ * ```
+ * import {rea} from "m33/ReaComponent.js";
+ * const tabComponetn = rea({
+ *  template, 
+ *  state, 
+ *  props
+ * }) 
+ * ```
+ */
+export function rea({template, state, props, css}) {
+    const yaml = new YAMLTemplate({template, state, props});
+
+    if (css) ReactiveTemplate.renderStaticCSS("rea_"+Ut.randomString(), css);
+
+    yaml.render();
+    return yaml
+}
 
 
 /**

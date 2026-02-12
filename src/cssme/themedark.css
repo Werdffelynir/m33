@@ -355,6 +355,7 @@
 
     a, .link {
         color: var(--inputTextColor);
+        cursor: pointer;
     }
     a:hover, .link:hover {
         color: color-mix(in srgb, var(--basicTextColor) 80%, transparent);

@@ -43,7 +43,7 @@ export const Doom = {
     insertIn(root, node, position = 'append') {
         Doom.insert(root?.firstElementChild ?? root, node, position);
     },
-
+    
     /**
      * ```
      * const card = create('div', { class: 'card', 'data-id': '42' }, [
@@ -70,22 +70,8 @@ export const Doom = {
             attrs = null;
         }
 
-        if (attrs && typeof attrs === 'object' && !Array.isArray(attrs) && !(attrs instanceof Node)) {
-            if ('style' in attrs && typeof attrs.style === 'object') {
-                styles = attrs.style;
-                delete attrs.style;
-            }
-
-            for (const [key, val] of Object.entries(attrs)) {
-                el.setAttribute(key, val);
-            }
-        }
-
-        if (styles && typeof styles === 'object') {
-            for (const [key, val] of Object.entries(styles)) {
-                el.style[key] = val;
-            }
-        }
+        if (attrs) 
+            this.setAttrs(el, attrs)
 
         const appendContent = (value) => {
 
@@ -110,6 +96,28 @@ export const Doom = {
         return el;
     },
 
+
+    setAttrs (el, attrs) {
+        let styles;
+
+        if (attrs && typeof attrs === 'object' && !Array.isArray(attrs) && !(attrs instanceof Node)) {
+            if ('style' in attrs && typeof attrs.style === 'object') {
+                styles = attrs.style;
+                delete attrs.style;
+            }
+
+            for (const [key, val] of Object.entries(attrs)) {
+                el.setAttribute(key, val);
+            }
+        }
+
+        if (styles && typeof styles === 'object') {
+            for (const [key, val] of Object.entries(styles)) {
+                el.style[key] = val;
+            }
+        }
+
+    },
 
 
     /**
@@ -277,7 +285,7 @@ export const Doom = {
     },
 
     /**
-     *
+     * todo: rename to setCSS
      * css( '.header', {color: 'red', 'font-size': '120%'} )
      * // or
      * css( '.header', 'color', 'red' )
