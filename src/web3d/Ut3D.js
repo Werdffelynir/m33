@@ -78,7 +78,7 @@ export async function loadScene(url, callback) {
 export async function loadGLTF(url, callback) {
     const gltf = await gltfLoader.loadAsync( url )
 
-    /**@type {Scene} */
+    /**@type {THREE.Scene|THREE.Group} */
     const scene = gltf.scene;
     scene.scale.setScalar( 1 );
     scene.position.set( 0, 0, 0 );

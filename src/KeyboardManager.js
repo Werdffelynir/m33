@@ -256,7 +256,18 @@ export class KeyboardManager extends IManager {
                     }
                 }
             }
-        } else {
+        } 
+
+        if (this.listeners.get('*')){
+            this.listeners.get('*').forEach(cb => cb(pressed, event, this._modifiers));
+        }
+
+        if (listenerCallbacks) {
+            listenerCallbacks.forEach(cb => cb(pressed, event, this._modifiers));
+        }
+
+
+        if (!pressed) {
            
             this._modifiers[event.key] = false;
             this._modifiers[event.code] = false;
@@ -275,14 +286,6 @@ export class KeyboardManager extends IManager {
                     }
                 }
             }
-        }
-
-        if (this.listeners.get('*')){
-            this.listeners.get('*').forEach(cb => cb(pressed, event));
-        }
-
-        if (listenerCallbacks) {
-            listenerCallbacks.forEach(cb => cb(pressed, event));
         }
     }
 
