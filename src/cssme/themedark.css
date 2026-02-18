@@ -1,3 +1,7 @@
+@import url("colors.css") layer(colors);
+@import url("cssme.css") layer(cssme);
+@import url("fonts.css") layer(fonts);
+
 
 @layer themedark {
     :root{
@@ -114,8 +118,7 @@
     }
 
     input[type=range],
-    textarea
-    {
+    textarea{
 
     }
 
@@ -133,7 +136,7 @@
     .button,
     button {
         cursor: pointer;
-        padding: var(--innerPadding)  ;
+        padding: var(--innerPadding);
         border: 1px solid var(--basicBorderColor);
         background-color: var(--buttonBackgroundColor);
         color: var(--buttonTextColor);

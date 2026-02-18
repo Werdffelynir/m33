@@ -17,17 +17,9 @@ import {InputControlManager} from "./InputControlManager.js";
 
 /**
  *
- * - 0-2 core level
- * - 3-4 app low level
- * - 5 app high level
- * - 6-7 game low level
- * - 8-9 game high level
  * ```
  * // use
  * window.GLogLevel = 4;
- *
- *
- *
  *
  * GLog(6, Data1 , Data2 , Data3)
  * ```
@@ -45,7 +37,6 @@ window.GLevelAppHegh = 5;
 window.GLevelGameLow = 6;
 window.GLevelGameMiddle = 7;
 window.GLevelGameHegh = 8;
-window.GLevelGame = 9;
 window.GLog = (...args) => {
 
     if (args.length < 2)
@@ -146,6 +137,8 @@ export class Register {
         this.pluginData = {};
         this.eventBus = new EventBus();
 
+        this.before() // TODO:
+
         //
         //
         // Reactive used IState for mutation of IState class and source
@@ -189,6 +182,8 @@ export class Register {
     /** @type {PluginManager}*/              get plugins() {return this.pluginManager}
     /** @type {InputControlManager}*/        get inputs () {return this.inputControlManager}
     /** @type {AssetLoader}*/                get assets () {return this.assetsLoader}
+
+    async before( ) {}
 
     async setup( params ) {
 

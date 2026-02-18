@@ -78,14 +78,16 @@ export async function loadScene(url, callback) {
 export async function loadGLTF(url, callback) {
     const gltf = await gltfLoader.loadAsync( url )
 
+    callback?.(gltf)
+
+    return gltf
+
     /**@type {THREE.Scene|THREE.Group} */
-    const scene = gltf.scene;
-    scene.scale.setScalar( 1 );
-    scene.position.set( 0, 0, 0 );
-
-    if (callback) scene.traverse(callback)
-
-    return scene
+    // const scene = gltf.scene;
+    // scene.scale.setScalar( 1 );
+    // scene.position.set( 0, 0, 0 );
+    // if (callback) scene.traverse(callback)
+    // return scene
 }
 
 

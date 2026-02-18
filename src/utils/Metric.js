@@ -3,6 +3,7 @@
 /**
  *
  * ```
+ * import {Metric} from "/m33/utils/Metric.js"
  * 
  * Metric.distance(fromX, fromY, toX, toY)
  * Metric.distanceSq
