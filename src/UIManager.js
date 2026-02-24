@@ -21,7 +21,11 @@ import {AssetLoader} from "./AssetLoader.js";
  * ```
  * configured( props = {} | {parent, eventBus, viewsPath, modal} )
  *
- *
+ * set(key, template)
+ * delete(key)
+ * show(key)
+ * hide(key)
+ * modal = true
  *
  * ```
  *

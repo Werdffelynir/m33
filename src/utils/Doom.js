@@ -119,6 +119,48 @@ export const Doom = {
 
     },
 
+    hide(el) {
+        if (!el.dataset._display) {
+            const display = getComputedStyle(el).display
+            if (display !== 'none') {
+                el.dataset._display = display
+            }
+        }
+        el.style.display = 'none'
+    },
+
+    show(el) {
+        if (el.dataset._display) {
+            el.style.display = el.dataset._display
+            delete el.dataset._display
+        } else {
+            el.style.display = ''
+        }
+    },
+
+    toggle(el) {
+        const hidden = getComputedStyle(el).display === 'none'
+        hidden ? Doom.show(el) : Doom.hide(el)
+    },
+
+    // show(el) {
+    //     const pre = el.dataset._display
+    //     el.style.display = pre ? pre : 'block'
+    //     el.removeAttribute('data-_display')
+    // },
+    // hide(el) {
+    //     const prop =  el.style.display && el.style.display !== 'none' ? el.style.display : 'block'
+    //     el.setAttribute('data-_display', prop);
+    //     el.style.display = 'none'
+    // },
+    // toggle(el) {
+    //     if (el.hasAttribute('data-_display')) {
+    //         Doom.show(el)
+    //     } else {
+    //         Doom.hide(el)
+    //     }
+    // },
+
 
     /**
      * ```
