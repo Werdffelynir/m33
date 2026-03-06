@@ -20,7 +20,7 @@ export class DBFile {
                     multiple: false
                 });
                 this.dbFileHandle = handle;
-                console.log('Existing DB file selected:', this.dbFileHandle.name);
+                console.log('Existing DBConnector file selected:', this.dbFileHandle.name);
             } else {
                 this.dbFileHandle = await window.showSaveFilePicker({
                     suggestedName: filename,
@@ -35,11 +35,11 @@ export class DBFile {
                 await writable.write(JSON.stringify(data, null, 2));
                 await writable.close();
 
-                console.log('New DB file created:', this.dbFileHandle.name);
+                console.log('New DBConnector file created:', this.dbFileHandle.name);
             }
 
         } catch (err) {
-            console.error('Failed to initialize DB file:', err);
+            console.error('Failed to initialize DBConnector file:', err);
             return;
         }
 
@@ -47,7 +47,7 @@ export class DBFile {
     }
     async readDBFile() {
         if (!this.dbFileHandle) {
-            console.warn("DB file is not initialized. Call initDBFile() first.");
+            console.warn("DBConnector file is not initialized. Call initDBFile() first.");
             return;
         }
 
@@ -56,13 +56,13 @@ export class DBFile {
             const contents = await file.text();
             return JSON.parse(contents);
         } catch (err) {
-            console.error("Failed to read DB file:", err);
+            console.error("Failed to read DBConnector file:", err);
             throw err;
         }
     }
     async writeDBFile(data) {
         if (!this.dbFileHandle) {
-            console.warn("DB file is not initialized. Call initDBFile() first.")
+            console.warn("DBConnector file is not initialized. Call initDBFile() first.")
             return;
         }
 
@@ -70,11 +70,11 @@ export class DBFile {
             const writable = await this.dbFileHandle.createWritable();
             await writable.write(JSON.stringify(data, null, 2));
             await writable.close();
-            console.log("DB file saved successfully.");
+            console.log("DBConnector file saved successfully.");
 
             return true;
         } catch (err) {
-            console.error("Failed to write DB file:", err);
+            console.error("Failed to write DBConnector file:", err);
             throw err;
         }
     }

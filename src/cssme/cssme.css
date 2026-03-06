@@ -37,13 +37,25 @@
                 // will not respond to events (click, hover, mousedown, etc.).
                 pointer-events: none;
 
+
                 transform: translateY(-50%) rotate(0deg);
 
+                // specifies a mask layer image.
+                mask-image: url(mask-shape.png);
                 mask-image: linear-gradient(  to left , transparent 20%, var(--inputBackgroundColor));
 
                 //
                 width: -webkit-fill-available;
                 height: -webkit-fill-available;
+
+                // text outline
+                -webkit-text-stroke: 0.4px var(--cc8);
+
+                // Standard property disable drag element (draggable="false")
+                user-drag: none;
+
+                // Disable text selection behavior as well
+                user-select: none;
         */
     }
 
@@ -238,10 +250,13 @@
     .vbase{vertical-align:baseline}
     .vbot, .vbottom{vertical-align:bottom}
 
+    .disabled {
+        pointer-events: none;
+        cursor: not-allowed;
+    }
     .bold{font-weight: bold}
     .italic{font-style: italic}
     .normal{font-style: normal; font-weight: normal}
-
     .capitalize{text-transform: capitalize}
     .lowercase{text-transform: lowercase}
     .uppercase{text-transform: uppercase}

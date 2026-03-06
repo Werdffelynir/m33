@@ -31,7 +31,7 @@ export class Reactive {
     /**
      *
      * ```
-     * state = new IState({
+     * stateSource = new IState({
      *   version: '1.0.0',
      *   user: {name: 'John',age: 30},
      *   position: { x: 0, y: 0 },
@@ -48,30 +48,31 @@ export class Reactive {
      *                  // if set, use `eventBus.subscribe("react:uiVar", )` for intercepted
      * }
      *
-     * const state = new Reactive(state, props);
+     * const react = new Reactive(stateSource, props);
+     *
+     *
+     * react.on('user.name', (value, prev) => {
+     *   console.log(`Name changed from ${prev} to ${value}`);
+     * });
+     *
+     * react.on('*', (path, value, prev) => {
+     *   console.log(`Changed [${path}]: ${prev} → ${value}`);
+     * });
+     *
+     * react.on('lib.math.*', (path, value, prev) => {
+     *   console.log(`Changed [${path}]: ${prev} → ${value}`);
+     * });
+     *
+     *
+     * const state = react.state
+     * state.user.name = 'Alice';      // execute 'user.name', '*'
+     * state.position.x = 100;         // execute '*'
+     * state.set('user.age', 40);      // use .set()
      *
      * // Warning! (LoopKeeper killer)
      * eventBus.subscribe( 'react:lib.math.geometry.corner', (path, value, prev) => {
      *   console.log(`Changed [${path}]: ${prev} → ${value}`);
      * } );
-     *
-     *
-     * state.on('user.name', (value, prev) => {
-     *   console.log(`Name changed from ${prev} to ${value}`);
-     * });
-     *
-     * state.on('*', (path, value, prev) => {
-     *   console.log(`Changed [${path}]: ${prev} → ${value}`);
-     * });
-     *
-     * state.on('lib.math.*', (path, value, prev) => {
-     *   console.log(`Changed [${path}]: ${prev} → ${value}`);
-     * });
-     *
-     *
-     * state.user.name = 'Alice';      // execute 'user.name', '*'
-     * state.position.x = 100;         // execute '*'
-     * state.set('user.age', 40);      // use .set()
      * ```
      * @param source {IState|{}}
      * @param params
@@ -158,46 +159,7 @@ export class Reactive {
      */
     mix(state) {
         Object.assign(this._proxy, state);
-/*        const merge = (target, source) => {
-            for (const [key, value] of Object.entries(source)) {
-                const t = target[key];
 
-                if (Array.isArray(value) && Array.isArray(t)) {
-                    t.length = 0;
-                    for (const item of value) t.push(item);
-
-                } else if (value instanceof IState && t instanceof IState) { //todo test
-                    for (const [k, v] of value.entries()) {
-                        t.set(k, v);
-                    }
-
-
-                } else if (value instanceof Map && t instanceof Map) {
-                    for (const [k, v] of value.entries()) {
-                        t.set(k, v);
-                    }
-
-                } else if (value instanceof Set && t instanceof Set) {
-                    for (const v of value.values()) {
-                        t.add(v);
-                    }
-
-                } else if (
-                    typeof value === 'object' &&
-                    value !== null &&
-                    typeof t === 'object' &&
-                    t !== null
-                ) {
-                    merge(t, value);
-
-                } else if (key in target) {
-                    target[key] = value;
-                }
-            }
-            return target;
-        };
-
-        return merge(this, state);*/
     }
 
     /**
@@ -315,6 +277,50 @@ export class Reactive {
             }
         }
     }
+
 }
 
 
+
+/*        const merge = (target, source) => {
+            for (const [key, value] of Object.entries(source)) {
+                const t = target[key];
+
+                if (Array.isArray(value) && Array.isArray(t)) {
+                    t.length = 0;
+                    for (const item of value) t.push(item);
+
+                } else if (value instanceof IState && t instanceof IState) { //todo test
+                    for (const [k, v] of value.entries()) {
+                        t.set(k, v);
+                    }
+
+
+                } else if (value instanceof Map && t instanceof Map) {
+                    for (const [k, v] of value.entries()) {
+                        t.set(k, v);
+                    }
+
+                } else if (value instanceof Set && t instanceof Set) {
+                    for (const v of value.values()) {
+                        t.add(v);
+                    }
+
+                } else if (
+                    typeof value === 'object' &&
+                    value !== null &&
+                    typeof t === 'object' &&
+                    t !== null
+                ) {
+                    merge(t, value);
+
+                } else if (key in target) {
+                    target[key] = value;
+                }
+            }
+            return target;
+        };
+
+        return merge(this, state);
+
+*/

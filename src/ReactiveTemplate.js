@@ -7,9 +7,9 @@ import {Doom} from "./utils/Doom.js";
 
 /**
  * ```
- *   button[data-id=@varReg][onclick=state.title='title changed']: "Change"
- *   // or
- *   button[onclick=@onclick]: "Change"
+ * button[data-id=@varReg][onclick=state.title='title changed']: "Change"
+ * // or
+ * button[onclick=@onclick]: "Change"
  * ```
  */
 export class ReactiveTemplate {

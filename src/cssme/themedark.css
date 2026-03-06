@@ -380,6 +380,12 @@
     }
 
 
+    .disabled {
+        pointer-events: none;
+        /* Optional: Add visual styling to indicate it is disabled */
+        opacity: 0.9;
+        cursor: not-allowed;
+    }
 
 
 }

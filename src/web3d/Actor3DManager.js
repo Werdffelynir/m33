@@ -2,7 +2,7 @@
 export class Actor3DManager {
 
     constructor() {
-        this.entities = new Map();    // id → Actor3D
+        this.entities = new Map();    // id Actor3D
         this.nextId = 1;
     }
 
