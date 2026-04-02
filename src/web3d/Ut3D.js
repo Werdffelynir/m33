@@ -55,7 +55,7 @@ export async function loadTexture(url, callback, repeated = 1) {
  * ```
  * @param url
  * @param callback
- * @return {Promise<Object3D>}
+ * @return {Promise<THREE.Object3D>}
  */
 export async function loadScene(url, callback) {
 

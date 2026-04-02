@@ -81,7 +81,6 @@ export class UIManager extends IManager {
             this.eventBus.publish(`ui:registered:${key}`, {name: key, data: template});
         }
 
-        template.style.zIndex = template?.style?.zIndex || 1;
         return template;
     }
 
@@ -152,7 +151,6 @@ export class UIManager extends IManager {
     show(key, point) {
         const view = this.archive.get(key);
 
-        // console.log(this.root)
         if (view && !this.root.contains(view)) {
 
             this.root.appendChild(view);

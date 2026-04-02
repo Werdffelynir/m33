@@ -7,12 +7,17 @@ import {ReactiveTemplate} from "./ReactiveTemplate.js";
 /**
  * ```
  * import {rea} from "m33/ReaComponent.js";
- * const tabComponetn = rea({
+ * const tabComponent = rea({
  *  template, 
  *  state, 
  *  props
  * }) 
  * ```
+ * @param template
+ * @param state
+ * @param props
+ * @param css
+ * @return {YAMLTemplate}
  */
 export function rea({template, state, props, css}) {
     const yaml = new YAMLTemplate({template, state, props});
@@ -35,6 +40,24 @@ export function rea({template, state, props, css}) {
  * loadingPage.mount(document.body)
  * ```
  *
+ * ```js
+ * const react = new ReaComponent({}, {
+ *     parent: document.body,
+ *     template: YAML_TEMPLATE,
+ *     state: { id: null, name: null },
+ * })
+ *
+ * react.mount()
+ * ```
+ *
+ * ```js
+ * const react = new ReaComponent({}, {
+ *     template: YAML_TEMPLATE,
+ *     state: {},
+ * })
+ *
+ * react.mount( document.body )
+ * ```
  *
  * ```view
  * input.cssClass[type=text][placeholder=CSS][autocomplete=off][spellcheck=false][onchange=@onchange]
@@ -166,7 +189,7 @@ export class ReaComponent {
      * @param root
      * @param parent
      */
-    render({root, parent}) {
+    render({root, parent} = {}) {
     }
 
     update() {

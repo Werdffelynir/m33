@@ -912,6 +912,12 @@ export const Doom = {
         return result;
     },
 
+    html(htmlString) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        return doc.body.firstChild;
+    },
+
     node2str(element) {
         const container = document.createElement("div");
         container.appendChild(element.cloneNode(true));

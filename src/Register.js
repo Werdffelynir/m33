@@ -128,7 +128,7 @@ export class Register {
      * @param config {Object|any}
      * @param state {Object|IState}
      */
-    constructor({config = {}, state}) {
+     constructor({config = {}, state}) {
 
         Register.instance = this;
 
