@@ -71,15 +71,16 @@ export class AnimationLoop {
 
     stop() {
         this._running = false;
-        if (this._raf != null) cancelAnimationFrame(this._raf);
+        if (this._raf != null)
+            cancelAnimationFrame(this._raf);
         this._raf = null;
     }
 
     start() {
         if (this._running) return;
+        this.lastTime = null;
         this._running = true;
         this._paused = false;
-        this.lastTime = null;
         this._fpsTimer = 0;
         this._frameCount = 0;
         this._iterator = 0;
@@ -96,7 +97,6 @@ export class AnimationLoop {
         }
 
         if (this._paused) {
-            // При паузі просто оновлюємо lastTime, пропускаємо logic і render
             this.lastTime = time;
             this._raf = requestAnimationFrame(this._loop);
             return;
@@ -107,7 +107,7 @@ export class AnimationLoop {
         let delta = (time - this.lastTime) / 1000;
         this.lastTime = time;
 
-        // fixed. spirals of death ([turn0search0][turn0search6])
+        // fixed. spirals of death
         // const maxDelta = 0.25;
         // if (delta > maxDelta) delta = maxDelta;
 
@@ -134,7 +134,8 @@ export class AnimationLoop {
             this._time += scaled;
         }
 
-        // optional: render з інтерполяцією між кроками physics
+        //
+        // optional: render with interpolation between physics steps
         // const alpha = this.accumulator / this.fixedDelta;
         // typeof sprite.interpolate === 'function' && sprite.interpolate(alpha);
 
@@ -152,6 +153,7 @@ export class AnimationLoop {
         this._needsRender = true;
     }
 
+    /** @deprecated */
     cancelAnimation() {
         if (this._raf != null) {
             cancelAnimationFrame(this._raf);
