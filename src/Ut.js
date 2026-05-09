@@ -832,6 +832,30 @@ export class Ut {
     //     const { default: instance } = await import(path.endsWith('.js') ? path : path + '.js' );
     //     return instance
     // }
+
+
+    /**
+     * ```
+     * Ut.loadArrayBuffer("/src/audio/file.wav")
+     * ```
+     * @param url
+     * @param callback
+     * @return {Promise<ArrayBuffer>}
+     */
+    static async loadArrayBuffer(url, callback = null) {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`JSON load failed: ${url} (${response.status})`);
+        }
+
+        if (typeof callback === "function") {
+            callback?.(response.arrayBuffer())
+        }
+
+        return await response.arrayBuffer();
+    }
+
 }
 
 

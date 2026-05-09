@@ -2,12 +2,50 @@ import * as THREE from "three";
 import { PositionalAudioHelper } from 'three/examples/jsm/helpers/PositionalAudioHelper.js';
 
 
-
+/**
+ * # Use:
+ * ```
+ * .setGlobal('preintro', {
+ *     loop: false,
+ * })
+ *
+ * // Play once, and delete the source after
+ * .setGlobal('preintro', {
+ *     loop: false,
+ *     once: true,
+ * })
+ * .play("preintro")
+ *
+ * // Only creates a new audio `rename` with additional `offset` and `duration` parameters
+ * .setGlobal("preintro", {
+ *     offset: 2,
+ *     duration: 3,
+ *     rename: "unlock_door"
+ * })
+ *
+ * .play("unlock_door")
+ *
+ * // Configures audio with parameters. Start from the beginning of the audio, loop from `loopStar` to `loopEnd`
+ * .setGlobal("preintro", {
+ *     loop: true,
+ *     loopStar: 2,
+ *     loopEnd: 3,
+ *     rename: "preintro_loop"
+ * })
+ * // To start playback from the recognized position, you need to recreate the source - copy the buffer and change the parameters:
+ * // Cuts and creates a new audio source
+ * .createCutLoop("preintro", "preintro_loop", 2, 3)
+ *
+ * .soundManager.play("preintro_loop")
+ *
+ *
+ * ```
+ */
 export class SoundManager3D {
 
-    constructor(camera, scene) {
-        this.camera = camera;
+    constructor(scene, camera) {
         this.scene = scene;
+        this.camera = camera;
         this.listener = new THREE.AudioListener();
         this.camera.add(this.listener);
 
@@ -136,20 +174,38 @@ export class SoundManager3D {
         volume = 1,
         isMusic = true,
         loop = false,
+        loopStar = null,
+        loopEnd = null,
+        rename = false,
         once = true,
+        delay = null,
+        offset = null,
+        duration = null,
+        detune = null,
     } = {}) {
-        const buffer = this.buffers.get(name);
+        const buffer = this.buffers.get(name)
         if (!buffer)
-            return console.warn(`Sound ${name} not loaded!`);
+            return console.warn(`Sound ${name} not loaded!`)
 
-        const sound = new THREE.Audio(this.listener);
-        sound.setBuffer(buffer);
-        sound.setLoop(loop);
+        const sound = new THREE.Audio(this.listener)
+        sound.setBuffer(buffer)
+        sound.setLoop(loop)
+
+        if (loopStar !== null && Number.isFinite(loopStar)) {
+            sound.setLoopStart(loopStar)
+            sound.offset = loopStar
+        }
+        if (loopEnd !== null && Number.isFinite(loopEnd)) sound.setLoopEnd(loopEnd)
+        if (detune !== null && Number.isFinite(detune)) sound.setDetune(detune)
+        if (offset !== null && Number.isFinite(offset)) sound.offset = offset
+        if (duration !== null && Number.isFinite(duration)) sound.duration = duration
 
         volume = (volume || 1) * this.masterVolume * (isMusic ? this.musicVolume : this.sfxVolume);
         sound.setVolume(volume);
 
-        this.sounds.set(name, sound);
+        sound.userData = {delay, offset, duration, detune, volume, loop}
+
+        this.sounds.set(rename || name, sound);
 
         if (once && !loop) {
             sound.onEnded = () => this._cleanupSound(name);
@@ -171,6 +227,12 @@ export class SoundManager3D {
         helper = false,
         rename = false,
         once = false,
+        loopStar = null,
+        loopEnd = null,
+        delay = null,
+        offset = null,
+        duration = null,
+        detune = null,
     } = {}) {
         const buffer = this.buffers.get(name);
         if (!buffer) return;
@@ -178,10 +240,20 @@ export class SoundManager3D {
         const sound = new THREE.PositionalAudio(this.listener);
         sound.setBuffer(buffer);
         sound.setLoop(loop || false);
+
         sound.setRefDistance(refDistance || 1);
         sound.setRolloffFactor(rolloff || 1);
         sound.setDistanceModel(distanceModel || 'inverse');
         sound.setMaxDistance(maxDistance || 10);
+
+        if (loopStar !== null && Number.isFinite(loopStar)) {
+            sound.setLoopStart(loopStar)
+            sound.offset = loopStar
+        }
+        if (loopEnd !== null && Number.isFinite(loopEnd)) sound.setLoopEnd(loopEnd)
+        if (detune !== null && Number.isFinite(detune)) sound.setDetune(detune)
+        if (offset !== null && Number.isFinite(offset)) sound.offset = offset
+        if (duration !== null && Number.isFinite(duration)) sound.duration = duration
 
         if (cone.length === 3) sound.setDirectionalCone(...cone);
 
@@ -192,11 +264,15 @@ export class SoundManager3D {
 
         if (target instanceof THREE.Object3D) {
             target.add(sound);
+
         } else if (target instanceof THREE.Vector3) {
             const anchor = new THREE.Object3D();
             anchor.position.copy(target);
+            anchor.name = "anchor_sound_"+name
+
             this.scene.add(anchor);
             anchor.add(sound);
+
             // Cleanup anchor on end
             sound.onEnded = () => {
                 this.scene.remove(anchor);
@@ -209,6 +285,8 @@ export class SoundManager3D {
             sound.add(audioHelper);
             sound.onEnded = () => sound.remove(audioHelper);
         }
+
+        sound.userData = {delay, offset, duration, detune, volume, loop}
 
         this.sounds.set(rename || name, sound);
 
@@ -270,6 +348,7 @@ export class SoundManager3D {
      * @param {THREE.Audio| String} sound - Sound object
      * @param {number} duration - Duration in seconds
      * @param {boolean} stopAfter - Whether to stop the sound completely after fading out
+     * @param {boolean} cleanAfter
      */
     fadeOut(sound, duration = 1.5, stopAfter = true, cleanAfter = false) {
         if (sound?.constructor === String) sound = this.sounds.get(sound);
@@ -309,38 +388,78 @@ export class SoundManager3D {
     }
 
     /**
-     * ```
-     * soundManager.stopAllFromObject(enemyMesh);
-     * scene.remove(enemyMesh);
-     * ```
-     * Clean up all sounds attached to a specific object
-     * Call this before mesh = null or scene.remove(mesh)
+     *
+     * @param name
+     * @param rename
+     * @param startTime
+     * @param endTime
+     * @return {THREE.PositionalAudio|THREE.Audio}
      */
-    stopAllFromObject(mesh) {
-        const toRemove = [];
+    createCutLoop(name, rename, startTime, endTime) {
+        /** @type {THREE.PositionalAudio|THREE.Audio} */
+        let audio;
+        if (this.soundManager.sounds.has(rename)) {
+            audio = this.soundManager.sounds.get(name)
+        } else {
+            audio = this.soundManager.sounds.get(name).clone()
+            this.soundManager.sounds.set(rename, audio)
 
-        this.sounds.forEach(sound => {
-            if (sound.parent === mesh || mesh.children.includes(sound)) {
-                toRemove.push(sound);
-            }
-        });
+            audio.setLoop(true);
+            audio.loopStart = startTime;
+            audio.loopEnd = endTime;
+            audio.offset = startTime;
 
-        toRemove.forEach(sound => this._cleanupSound(sound));
+            audio.setup = function() {
+                if (this.source !== undefined) this.source.disconnect();
+
+                this.source = this.context.createBufferSource();
+                this.source.buffer = this.buffer;
+                this.source.loop = this.loop;
+                this.source.loopStart = this.loopStart;
+                this.source.loopEnd = this.loopEnd;
+
+                this.source.connect(this.getOutput());
+
+                this.source.onended = () => {
+                    this.isPlaying = false;
+                    if (this.onEnded) this.onEnded();
+                };
+
+                const originalStart = this.source.start;
+                this.source.start = (when, offset, duration) => {
+                    originalStart.call(this.source, when, this.offset, duration);
+                };
+            };
+        }
+
+        return audio
     }
-
 
 
     // CONTROLS
 
+    /**
+     * ```
+     * // click, pointerdown, touchend, keydown
+     * window.addEventListener('click', async () => {
+     *      await resumeContext()
+     * }, { once: true });
+     * ```
+     * @return {Promise<void>}
+     */
     async resumeContext() {
         if (this.listener.context.state === 'suspended') {
             await this.listener.context.resume();
         }
     }
 
+
     play(name) {
         /** @type {THREE.PositionalAudio} */
         const sound = this.sounds.get(name)
+
+        if (sound.isPlayed) sound.stop()
+
         sound.play()
     }
 
@@ -352,7 +471,7 @@ export class SoundManager3D {
     }
 
     pause(name) {
-        const sound =this.sounds.get(name)
+        const sound = this.sounds.get(name)
         sound.pause()
     }
 
@@ -373,6 +492,26 @@ export class SoundManager3D {
 
     stopAll() {
         this.sounds.forEach(sound => this._cleanupSound(sound))
+    }
+
+    /**
+     * ```
+     * soundManager.stopAllFromObject(enemyMesh);
+     * scene.remove(enemyMesh);
+     * ```
+     * Clean up all sounds attached to a specific object
+     * Call this before mesh = null or scene.remove(mesh)
+     */
+    stopAllFromObject(mesh) {
+        const toRemove = [];
+
+        this.sounds.forEach(sound => {
+            if (sound.parent === mesh || mesh.children.includes(sound)) {
+                toRemove.push(sound);
+            }
+        });
+
+        toRemove.forEach(sound => this._cleanupSound(sound));
     }
 }
 

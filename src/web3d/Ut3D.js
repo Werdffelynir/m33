@@ -139,28 +139,47 @@ export async function loadOBJ(url, urlMLT, callback) {
     return await objLoader.loadAsync( url );
 }
 
-// todo me
-export async function loadAudio(url, callback) {
+
+export async function loadPositionalAudio(url, options = {}, callback) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`PositionalAudio load failed: ${url} (${response.status})`);
+
+    const buffer = await response.arrayBuffer();
     const listener = new THREE.AudioListener();
-    const sound = new THREE.Audio( listener );
+    const sound = new THREE.PositionalAudio(listener);
 
-    const fftSize = 128;
-
-    await audioLoader.loadAsync(url, function( buffer ) {
-        // sound.setBuffer( buffer );
-        // sound.setLoop( true );
-        // sound.setVolume( 0.5 );
-        // sound.play();
-    });
-
-    // const songElement = document.getElementById( 'song' );
-    // sound1.setMediaElementSource( songElement );
-    // sound1.setRefDistance( 20 );
-    // songElement.play();
+    sound.setBuffer(buffer);
+    sound.setVolume(sound.volume);
+    sound.setLoop(options?.loop || false);
+    sound.setRefDistance(options?.refDistance || 1);
+    sound.setRolloffFactor(options?.rolloff || 1);
+    sound.setDistanceModel(options?.distanceModel || 'inverse');
+    sound.setMaxDistance(options?.maxDistance || 10);
+    if (options?.cone.length === 3)
+        sound.setDirectionalCone(...options?.cone);
+    if (options?.position.length === 3)
+        sound.position.fromArray(sound.position || [0, 0, 0]);
 
     callback?.(sound)
 
-    return sound
+    return {buffer, sound, listener}
+}
+
+export async function loadAudio(url, options = {}, callback) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`lAudio load failed: ${url} (${response.status})`);
+    const buffer = await response.arrayBuffer();
+    const listener = new THREE.AudioListener();
+    const sound = new THREE.Audio( listener );
+    const fftSize = 128;
+
+    sound.setBuffer(buffer);
+    sound.setVolume(sound.volume);
+    sound.setLoop(options?.loop || false);
+
+    callback?.(sound)
+
+    return {buffer, sound, listener}
 }
 
 
@@ -219,6 +238,7 @@ export const canvasTexture = (callback, width, height) => {
 
     return texture
 }
+
 export const imageTexture = (img, callback, width, height) => {
     img.width = width
     img.height = height
@@ -230,303 +250,3 @@ export const imageTexture = (img, callback, width, height) => {
 
     return texture;
 }
-
-
-
-/**
- * ```
- * perlin = new PerlinNoise(seedNumber)
- * perlin.noise(x, y)
- *         this._seed = seed ?? math?.random?.() ?? Math.random()
- * ```
- */
-
-export class PerlinNoise {
-
-    constructor(seed = 1, math) {
-
-
-        // simple deterministic RNG (LCG)
-        let s = seed >>> 0
-        this.random = math?.random ?? (() => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296)
-
-        this.seedGenerate()
-    }
-
-    seedGenerate() {
-        const p = new Uint8Array(256)
-        this.perm = new Uint8Array(512)
-
-        for (let i = 0; i < 256; i++) p[i] = i
-        
-        // Fisher–Yates shuffle
-        for (let i = 255; i > 0; i--) {
-            const j = (this.random() * (i + 1)) | 0
-            ;[p[i], p[j]] = [p[j], p[i]]
-        }
-
-        for (let i = 0; i < 512; i++) {
-            this.perm[i] = p[i & 255]
-        }
-    }
-
-    fade(t) {
-        return t * t * t * (t * (t * 6 - 15) + 10)
-    }
-
-    lerp(a, b, t) {
-        return a + t * (b - a)
-    }
-
-    grad(hash, x, y) {
-        switch (hash & 7) {
-            case 0: return  x + y
-            case 1: return -x + y
-            case 2: return  x - y
-            case 3: return -x - y
-            case 4: return  x
-            case 5: return -x
-            case 6: return  y
-            case 7: return -y
-        }
-    }
-
-    noise(x, y) {
-        const X = Math.floor(x) & 255
-        const Y = Math.floor(y) & 255
-
-        const xf = x - Math.floor(x)
-        const yf = y - Math.floor(y)
-
-        const u = this.fade(xf)
-        const v = this.fade(yf)
-
-        const p = this.perm
-
-        const aa = p[X +     p[Y]]
-        const ab = p[X +     p[Y + 1]]
-        const ba = p[X + 1 + p[Y]]
-        const bb = p[X + 1 + p[Y + 1]]
-
-        const x1 = this.lerp(
-            this.grad(aa, xf,     yf),
-            this.grad(ba, xf - 1, yf),
-            u
-        )
-
-        const x2 = this.lerp(
-            this.grad(ab, xf,     yf - 1),
-            this.grad(bb, xf - 1, yf - 1),
-            u
-        )
-
-        // [-1, 1]
-        return this.lerp(x1, x2, v)
-    }
-}
-
-
-/* export class PerlinNoise {
-
-    constructor(seed, math) {
-
-        this._seed = seed ?? math?.random?.() ?? Math.random()
-
-        const p = Array.from({length: 256}, (_, i) => i)
-
-        for (let i = 255; i > 0; i--) {
-
-            let j = Math.floor(this._seed * (i + 1));
-
-            [p[i], p[j]] = [p[j], p[i]];
-        }
-
-
-        this._perm = p.concat(p);
-    }
-    fade(t) {return t * t * t * (t * (t *  6 - 15) + 10); }
-    lerp(a, b, t) { return a + t * (b - a); }
-    grad(hash, x, y) {
-        switch (hash & 3) {
-            case 0: return  x + y;
-            case 1: return -x + y;
-            case 2: return  x - y;
-            case 3: return -x - y;
-        }
-    }
-
-
-    noise(x, y) {
-        const X = Math.floor(x) & 255;
-        const Y = Math.floor(y) & 255;
-
-        x -= Math.floor(x);
-        y -= Math.floor(y);
-
-        const u = this.fade(x);
-        const v = this.fade(y);
-
-        const perm = this._perm;
-
-        const aa = perm[X + perm[Y]];
-        const ab = perm[X + perm[Y + 1]];
-        const ba = perm[X + 1 + perm[Y]];
-        const bb = perm[X + 1 + perm[Y + 1]];
-
-        return this.lerp(
-            this.lerp(this.grad(aa, x, y),     this.grad(ba, x - 1, y),     u),
-            this.lerp(this.grad(ab, x, y - 1), this.grad(bb, x - 1, y - 1), u),
-            v
-        );
-    }
-} */
-
-    // perlin(x, y) {
-    //     return this.noise(
-    //         x * this.scaleX,
-    //         y * this.scaleY
-    //     ) * this.size
-    // }
-
-/**
- * select object - mouse dblclick, or shiftKey + click
- * hotkeys:
- *     Digit1  translate
- *     Digit2  rotate
- *     Digit3  scale
- *     Digit4  space local / world
- *     Digit5    detach
- */
-export class SelectTransformTarget {
-
-    constructor() {
-
-    }
-
-    setup({renderer, camera, scene, onChange, onDragging, onSelect, enabled = false}) {
-        this.renderer = renderer;
-        this.camera = camera;
-        this.scene = scene;
-        this.onChange = onChange;
-        this.onDragging = onDragging;
-        this.onSelect = onSelect;
-        this.enabled = enabled;
-
-
-        const mouse = new THREE.Vector2();
-        const raycaster = new THREE.Raycaster();
-
-        const checkSelectable = (object) => {
-
-            //  && (object?.geometry?.type && ["BoxGeometry", "PlaneGeometry", "CylinderGeometry","CapsuleGeometry"].includes(object.geometry.type)
-            return object
-                && object.isObject3D  && ( object.isSprite || object.isMesh  )
-                && !object.isTransformControlsPlane && object.tag !== "helper"
-        }
-
-        const checkIntersects = (intersects) => {
-            for (var i = intersects.length - 1; i >= 0; i--) {
-                if (checkSelectable(intersects[i].object)) return intersects[i].object;
-            }
-            return false
-        }
-
-        const onClick = (event) => {
-
-            event.preventDefault();
-            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-            raycaster.setFromCamera( mouse, this.camera );
-
-            const intersects = raycaster.intersectObjects(scene.children, true);
-
-            if (intersects.length > 0) {
-
-                const object = checkIntersects(intersects) // intersects[0].object;
-                if (object) {
-                    this.intersectedObject = object// intersects[0].object;
-
-
-                } else {
-                    this.intersectedObject = undefined;
-                }
-
-            } else {
-                if (this.intersectedObject) {}
-                this.intersectedObject = undefined;
-            }
-
-
-
-            if (this.enabled){
-                if (this.intersectedObject) {
-                    this.transformControls.attach(this.intersectedObject);
-
-                    this.transformControls.space = 'world' // reset space
-                } else {
-                    this.transformControls.detach();
-                }
-            }
-
-
-
-            this.onSelect?.(event, this.intersectedObject)
-        };
-
-
-
-        this.renderer.domElement.addEventListener('dblclick', (event) => {
-            if (!this.enabled) return;
-            onClick (event)
-        })
-
-        this.renderer.domElement.addEventListener('click', (event) => {
-            if (!this.enabled) return;
-            if (Register.instance.inputs.keyboardManager.keys.shiftKey)
-                onClick (event)
-        })
-
-
-
-        if (this.enabled)
-            this._setTransformControls()
-    }
-
-    _setTransformControls() {
-
-        const transformControls = new TransformControls(this.camera, this.renderer.domElement);
-        transformControls.setMode('translate')
-
-        Register.instance.inputs.keyboardManager.onKeyJust('Digit1', () => transformControls.setMode('translate'))
-        Register.instance.inputs.keyboardManager.onKeyJust('Digit2', () => transformControls.setMode('rotate'))
-        Register.instance.inputs.keyboardManager.onKeyJust('Digit3', () => transformControls.setMode('scale'))
-        Register.instance.inputs.keyboardManager.onKeyJust('Digit4', () => {
-            if (this.intersectedObject) {
-                transformControls.space = transformControls.space === 'world' ? 'local' : 'world'
-                this.onChange({}, this.intersectedObject)
-            }
-        })
-        Register.instance.inputs.keyboardManager.onKeyJust('Digit5', () => transformControls.detach())
-
-        // target: null, type: "change"
-        transformControls.addEventListener('change', (event) => {
-            if (event.target) {
-                this.onChange(event, this.intersectedObject)
-            }
-        });
-
-        transformControls.addEventListener('dragging-changed', (event) => {
-            this.onDragging(event, this.intersectedObject)
-        });
-
-        const gizmo = transformControls.getHelper();
-        transformControls.size = 0.65
-
-        this.scene.add(gizmo);
-
-        this.transformControls = transformControls;
-    }
-}
-
-

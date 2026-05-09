@@ -983,7 +983,11 @@ export const Doom = {
 
 }
 
-
+/**
+ *
+ * @param src
+ * @return {Promise< HTMLAudioElement>}
+ */
 Doom.load.audio = async function (src) {
     const audio = new Audio(src);
     return new Promise((resolve, reject) => {
