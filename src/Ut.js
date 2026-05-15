@@ -134,24 +134,33 @@ export class Ut {
      * timeout();
      * for (var i = 0; i < 5; i++) {
      *     timeout();
+     *     // timeout.cancel()
      * }
      * ```
      * @returns {(function(): void)|*}
      */
     static delay = (func, ms) => {
-        let timer;
-        return function () {
+        let timer = null;
+
+        const debounced = function (...args) {
             if (timer) clearTimeout(timer);
 
-            if (!timer) {
-                timer = setTimeout(() => {
-                    func();
-                    timer = false;
-                }, ms);
-            }
-            return timer
+            timer = setTimeout(() => {
+                func.apply(this, args);
+                timer = null;
+            }, ms);
         };
+
+        debounced.cancel = () => {
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
+        };
+
+        return debounced;
     };
+
 
     /**
      * ```
@@ -452,6 +461,24 @@ export class Ut {
 
     // Parsers
     // __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __  __ Types
+
+    static parsePrimitive(value) {
+        if (typeof value !== 'string') return value;
+
+        const normalized = value.trim().toLowerCase();
+        if (normalized === "true") return true;
+        if (normalized === "false") return false;
+        if (normalized === "null") return null;
+        if (normalized === "undefined") return undefined;
+
+        const num = Number(value);
+
+        if (value.trim() !== '' && Number.isFinite(num)) {
+            return num;
+        }
+
+        return value;
+    }
 
     /**
      * ```

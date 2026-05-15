@@ -182,6 +182,7 @@ export class SoundManager3D {
         offset = null,
         duration = null,
         detune = null,
+        rate = null,
     } = {}) {
         const buffer = this.buffers.get(name)
         if (!buffer)
@@ -197,6 +198,7 @@ export class SoundManager3D {
         }
         if (loopEnd !== null && Number.isFinite(loopEnd)) sound.setLoopEnd(loopEnd)
         if (detune !== null && Number.isFinite(detune)) sound.setDetune(detune)
+        if (rate !== null && Number.isFinite(rate)) sound.setPlaybackRate(rate)
         if (offset !== null && Number.isFinite(offset)) sound.offset = offset
         if (duration !== null && Number.isFinite(duration)) sound.duration = duration
 
@@ -233,6 +235,7 @@ export class SoundManager3D {
         offset = null,
         duration = null,
         detune = null,
+        rate = null,
     } = {}) {
         const buffer = this.buffers.get(name);
         if (!buffer) return;
@@ -241,10 +244,11 @@ export class SoundManager3D {
         sound.setBuffer(buffer);
         sound.setLoop(loop || false);
 
-        sound.setRefDistance(refDistance || 1);
-        sound.setRolloffFactor(rolloff || 1);
         sound.setDistanceModel(distanceModel || 'inverse');
+        sound.setRefDistance(refDistance || 1);
         sound.setMaxDistance(maxDistance || 10);
+        sound.setRolloffFactor(rolloff || 1);
+        if (rate !== null && Number.isFinite(rate)) sound.setPlaybackRate(rate)
 
         if (loopStar !== null && Number.isFinite(loopStar)) {
             sound.setLoopStart(loopStar)
